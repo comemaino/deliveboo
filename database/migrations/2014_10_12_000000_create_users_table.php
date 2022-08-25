@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('business_name')->unique();
+            $table->string('slug')->unique();
             $table->string('address');
             $table->string('vat', 11)->unique();
             $table->text('cover')->nullable();

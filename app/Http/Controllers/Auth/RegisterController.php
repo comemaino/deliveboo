@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -38,7 +39,15 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+
         $this->middleware('guest');
+        $this->showRegistrationForm();
+    }
+
+    public function showRegistrationForm()
+    {
+        $categories = Category::all();
+        return view('auth.register', compact('categories'));
     }
 
     /**
@@ -54,6 +63,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'business_name' => ['required', 'string'],
+            'slug' => ['required', 'string'],
             'address' => ['required', 'string'],
             'vat' => ['required', 'string', 'digits:11'],
             'cover' => ['text']
@@ -73,6 +83,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'business_name' => $data['business_name'],
+            'slug' => $data['slug'],
             'address' => $data['address'],
             'vat' => $data['vat'],
             'cover' => $data['cover']

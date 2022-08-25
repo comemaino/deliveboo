@@ -17,14 +17,14 @@ class CreateCategoryUserTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')
-                ->on('category')
-                ->onDelete('set null');
+                ->on('categories');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
-                ->onDelete('set null');
+                ->on('users');
+
+            $table->primary(['category_id', 'user_id']);
         });
     }
 
