@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class ProductController extends Controller
 {
@@ -12,9 +16,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $products = Product::where('user_id', '=', $id)->get();
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -44,9 +49,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug, $id)
     {
-        //
+        $user = Auth::user();
+        $user_id = Crypt::decrypt($id);
+        $product = Product::where('slug', '=', $slug)->where('user_id', '=', $user_id)->first();
+        // dd($user_id);
+        return view('admin.products.show', compact('product', 'user'));
     }
 
     /**
