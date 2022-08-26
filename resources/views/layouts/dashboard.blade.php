@@ -53,12 +53,16 @@
                                 Home Page
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.posts.index') }}">
+                        <li class="nav-item">
+                            {{-- <a class="nav-link" href="{{ route('admin.products', ['id' => $user->id]) }}">
                                 <i class="fas fa-border-all"></i>
-                                Tutti i Posts
+                                Tutti i Prodotti
+                            </a> --}}
+                            <a class="nav-link" href="{{ route('admin.products', ['id' => Crypt::encrypt($user->id) ]) }}">
+                                <i class="fas fa-border-all"></i>
+                                Tutti i Prodotti
                             </a>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.posts.create') }}">
                                 <i class="fas fa-plus-square"></i>
