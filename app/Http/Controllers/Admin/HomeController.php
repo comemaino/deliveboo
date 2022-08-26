@@ -1,10 +1,13 @@
 <?php
-
+// USER CONTROLLER
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
@@ -15,7 +18,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        // $user = User::findOrFail($id);
+        $user = Auth::user();
+        return view('admin.home', compact('user'));
     }
 
     /**
@@ -47,7 +52,10 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = Crypt::decrypt($id);
+        $products = Product::where('user_id', '=', $user_id)->get();
+        $user = Auth::user();
+        return view('admin.show', compact('products', 'user'));
     }
 
     /**
