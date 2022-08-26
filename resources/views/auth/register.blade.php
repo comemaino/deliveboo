@@ -31,7 +31,7 @@ dd($categories);
 							</div>
 
 							<div class="form-group row">
-								<label for="business_name" class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }}</label>
+								<label for="business_name" class="col-md-4 col-form-label text-md-right">Business name</label>
 
 								<div class="col-md-6">
 									<input id="business_name" type="text" class="form-control @error('business_name') is-invalid @enderror"
@@ -46,7 +46,7 @@ dd($categories);
 							</div>
 
 							<div class="form-group row">
-								<label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+								<label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
 
 								<div class="col-md-6">
 									<input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address"
@@ -75,7 +75,7 @@ dd($categories);
 							</div>
 
 							<div class="form-group row">
-								<label for="vat" class="col-md-4 col-form-label text-md-right">{{ __('Vat') }}</label>
+								<label for="vat" class="col-md-4 col-form-label text-md-right">Vat</label>
 
 								<div class="col-md-6">
 									<input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" name="vat"
