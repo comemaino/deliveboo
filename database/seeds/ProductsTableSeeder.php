@@ -19,7 +19,7 @@ class ProductsTableSeeder extends Seeder
         foreach($products as $product) {
             $new_product = new Product();
             $new_product->fill($product);
-            $new_product->slug = Str::slug($product['name']);
+            $new_product->slug = Product::generateSlug($product['name']);
             $new_product->save();
         }
     }

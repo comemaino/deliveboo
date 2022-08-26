@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
                 ->on('users');
 
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('img');
             $table->unsignedDecimal('price', 4,2);
             $table->text('ingredients');

@@ -52,12 +52,22 @@ return [
     ],
     [
         "id" => 6,
-        "user_id" => 8,
+        "user_id" => 10,
         "name" => "Pizza Margherita",
         "img" => "https://primochef.it/wp-content/uploads/2019/08/SH_pizza_fatta_in_casa-1200x800.jpg",
         "price" => 6.99,
         "ingredients" => "Farina di grano duro, passata di pomodoro, mozzarella di bufala e basilico",
         "description" => "La Margherita, il classico Napoletano",
+        "visibility" => true,
+    ],
+    [
+        "id" => 7,
+        "user_id" => 10,
+        "name" => "Panino con Bacon",
+        "img" => "https://2.bp.blogspot.com/-VpO0bvEuQX8/XB9T6wFGr8I/AAAAAAAANzo/z-ooYWHvK2EHUPJmVt7-4CugQjDqpOW3gCLcBGAs/s1600/IMG_2342.JPG",
+        "price" => 8.00,
+        "ingredients" => "Farina di grano duro, passata di pomodoro, mozzarella di bufala e basilico",
+        "description" => "Panino con doppio hamburger e bacon extra-croccante",
         "visibility" => true,
     ],
 ]
