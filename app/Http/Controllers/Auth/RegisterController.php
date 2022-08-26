@@ -8,7 +8,9 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -41,13 +43,33 @@ class RegisterController extends Controller
     {
 
         $this->middleware('guest');
-        $this->showRegistrationForm();
+        // $this->showRegistrationForm();
     }
 
     public function showRegistrationForm()
     {
         $categories = Category::all();
         return view('auth.register', compact('categories'));
+    }
+
+    public function userRegistration(Request $request) 
+    {
+        // $request->$this->validator();
+        $data = $request->all();
+        $user = new User();
+        $user->fill($data);
+        $user->slug = Str::slug($user->business_name);
+        $user->password = Hash::make($user->password);
+        $user->save();
+
+        if(isset($data['categories'])) {
+            $user->categories()->sync($data['categories']);
+        }
+
+        $this->guard()->login($user);
+
+        return redirect()->route('admin.home');
+
     }
 
     /**
