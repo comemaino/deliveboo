@@ -41,5 +41,7 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function() {
        Route::get('/', 'HomeController@index')->name('home'); 
+       Route::get('/products/{id}', 'HomeController@show')->name('products');
+       Route::get('/product/{slug}/{id}', 'ProductController@show')->name('products.show');
     });
 

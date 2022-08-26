@@ -68,7 +68,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.home.', ['id' => $user->id]);
 
     }
 
