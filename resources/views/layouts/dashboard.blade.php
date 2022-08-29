@@ -63,12 +63,12 @@
                                 Tutti i Prodotti
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.posts.create') }}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.products.create', ['id' => Crypt::encrypt($user->id) ]) }}">
                                 <i class="fas fa-plus-square"></i>
-                              Crea Nuovo Post
+                              Aggiungi un nuovo prodotto
                             </a>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.categories.index') }}">
                                 <i class="fas fa-list-ul"></i>

@@ -4,7 +4,7 @@
 <h1>{{ $product->name }}</h1>
     
 @if ($product->img)
-    <img style="max-width: 400px;" src="{{ $product->img }}" alt="">  
+    <img style="max-width: 400px;" src="{{ $product->img) }}" alt="">  
 @endif
 
 <div>

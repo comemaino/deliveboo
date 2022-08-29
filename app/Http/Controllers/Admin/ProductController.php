@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -27,9 +28,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $user = Auth::user();
+        $user_id = Crypt::decrypt($id);
+        return view('admin.products.create', compact('user_id', 'user'));
     }
 
     /**
@@ -40,7 +43,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $product = new Product();
+        $product->fill($data);
+        $product->slug = $this->generateSlug($product->name);
+        $product->save();
+        // return redirect()->route('admin.products.show', ['slug'=>$product->slug, 'id'=>$product->user_id]);
     }
 
     /**
@@ -53,6 +61,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $user_id = Crypt::decrypt($id);
+        $user_id = $user->id;
         $product = Product::where('slug', '=', $slug)->where('user_id', '=', $user_id)->first();
         // dd($user_id);
         return view('admin.products.show', compact('product', 'user'));
@@ -90,5 +99,20 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public static function generateSlug($name)
+    {
+        $init_slug = Str::slug($name, '-');
+        $slug = $init_slug;
+        $count = 1;
+        $product_found = Product::where('slug', $slug)->first();
+        while ($product_found) {
+            $slug = $init_slug . '-' . $count;
+            $product_found = Product::where('slug', $slug)->first();
+            $count++;
+        }
+
+        return $slug;
     }
 }
