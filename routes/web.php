@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,6 @@ Route::middleware('auth')
         // Route::resource('products', 'ProductController');
         Route::post('/products/store', 'ProductController@store')->name('products.store');
         Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
+        Route::get('/products/edit/{slug}/{id}', 'ProductController@edit')->name('products.edit');
+        Route::put('/products/update/{id}', 'ProductController@update')->name('products.update');
     });

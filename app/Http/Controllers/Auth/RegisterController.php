@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -68,7 +69,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return redirect()->route('admin.home', ['id' => $user->id]);
+        return redirect()->route('admin.home');
 
     }
 

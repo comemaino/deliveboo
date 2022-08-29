@@ -21,4 +21,7 @@
 
 
 	<p>{{ $product->content }}</p>
+
+	<a href="{{ route('admin.products.edit', ['id' => Crypt::encrypt($user->id), 'slug' => $product->slug]) }}"
+		class="btn btn-primary">Modifica Piatto</a>
 @endsection

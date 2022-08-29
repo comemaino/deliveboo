@@ -78,9 +78,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug, $id)
     {
-        //
+        $user = Auth::user();
+        $user_id = Crypt::decrypt($id);
+        $product = Product::where('slug', '=', $slug)->first();
+        return view('admin.products.edit', compact('product', 'user', 'user_id'));
     }
 
     /**
@@ -92,7 +95,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $product = Product::where('id', '=', $id)->first();
+        if (isset($data['img'])) {
+            if ($product->img) {
+                Storage::delete($product->img);
+            }
+            $image_path = Storage::put('products_imgs', $data['img']);
+            $data['img'] = $image_path;
+        }
+        if(!($data['name'] === $product->name)) {
+            $data['slug'] = Product::generateSlug($data['name']);
+            $product->slug = $data['slug'];
+        }
+        $product->update($data);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => Crypt::encrypt($product->user_id)]);
     }
 
     /**
@@ -104,20 +121,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public static function generateSlug($name)
-    {
-        $init_slug = Str::slug($name, '-');
-        $slug = $init_slug;
-        $count = 1;
-        $product_found = Product::where('slug', $slug)->first();
-        while ($product_found) {
-            $slug = $init_slug . '-' . $count;
-            $product_found = Product::where('slug', $slug)->first();
-            $count++;
-        }
-
-        return $slug;
     }
 }
