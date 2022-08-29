@@ -39,12 +39,11 @@ Route::middleware('auth')
     ->namespace('Admin')
     ->name('admin.')
     ->prefix('admin')
-    ->group(function() {
-       Route::get('/', 'HomeController@index')->name('home'); 
-       Route::get('/products/{id}', 'HomeController@show')->name('products');
-       Route::get('/products/create/{id}', 'ProductController@create')->name('products.create');
-        Route::resource('products', 'ProductController');
-        // Route::post('/products/store', 'ProductController@store');
-       Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
+    ->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/products/{id}', 'HomeController@show')->name('products');
+        Route::get('/products/create/{id}', 'ProductController@create')->name('products.create');
+        // Route::resource('products', 'ProductController');
+        Route::post('/products/store', 'ProductController@store');
+        Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
     });
-

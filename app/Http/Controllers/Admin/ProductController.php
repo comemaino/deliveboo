@@ -31,8 +31,10 @@ class ProductController extends Controller
     public function create($id)
     {
         $user = Auth::user();
+
         $user_id = Crypt::decrypt($id);
-        return view('admin.products.create', compact('user_id', 'user'));
+        return view('admin.products.create', compact('user_id'));
+        dd($id);
     }
 
     /**
@@ -48,7 +50,7 @@ class ProductController extends Controller
         $product->fill($data);
         $product->slug = $this->generateSlug($product->name);
         $product->save();
-        // return redirect()->route('admin.products.show', ['slug'=>$product->slug, 'id'=>$product->user_id]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => $product->user_id]);
     }
 
     /**
