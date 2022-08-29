@@ -51,7 +51,7 @@ class ProductController extends Controller
         $data['img'] = $image_path;
         $product = new Product();
         $product->fill($data);
-        $product->slug = $this->generateSlug($product->name);
+        $product->slug = Product::generateSlug($product->name);
         $product->save();
         return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => Crypt::encrypt($product->user_id)]);
     }
@@ -104,7 +104,7 @@ class ProductController extends Controller
             $image_path = Storage::put('products_imgs', $data['img']);
             $data['img'] = $image_path;
         }
-        if(!($data['name'] === $product->name)) {
+        if (!($data['name'] === $product->name)) {
             $data['slug'] = Product::generateSlug($data['name']);
             $product->slug = $data['slug'];
         }
@@ -120,6 +120,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        // Se c'è l'immagine cover, allora la cancelliamo
+        if ($product->img) {
+            Storage::delete($product->img);
+        }
+        $product->delete();
+        $user = Auth::user();
+        $user_id = $user->id;
+        return redirect()->route('admin.products', ['id' => Crypt::encrypt($user->id)]);
     }
 }

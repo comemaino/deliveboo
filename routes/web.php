@@ -49,4 +49,5 @@ Route::middleware('auth')
         Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
         Route::get('/products/edit/{slug}/{id}', 'ProductController@edit')->name('products.edit');
         Route::put('/products/update/{id}', 'ProductController@update')->name('products.update');
+        Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
     });
