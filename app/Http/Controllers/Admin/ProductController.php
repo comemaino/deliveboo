@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -46,11 +47,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $image_path = Storage::put('products_imgs', $data['img']);
+        $data['img'] = $image_path;
         $product = new Product();
         $product->fill($data);
         $product->slug = $this->generateSlug($product->name);
         $product->save();
-        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => $product->user_id]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => Crypt::encrypt($product->user_id)]);
     }
 
     /**
@@ -63,10 +66,10 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $user_id = Crypt::decrypt($id);
-        $user_id = $user->id;
+        // $user_id = $user->id;
         $product = Product::where('slug', '=', $slug)->where('user_id', '=', $user_id)->first();
         // dd($user_id);
-        return view('admin.products.show', compact('product', 'user'));
+        return view('admin.products.show', compact('product', 'user', 'user_id'));
     }
 
     /**

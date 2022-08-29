@@ -44,6 +44,6 @@ Route::middleware('auth')
         Route::get('/products/{id}', 'HomeController@show')->name('products');
         Route::get('/products/create/{id}', 'ProductController@create')->name('products.create');
         // Route::resource('products', 'ProductController');
-        Route::post('/products/store', 'ProductController@store');
+        Route::post('/products/store', 'ProductController@store')->name('products.store');
         Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
     });

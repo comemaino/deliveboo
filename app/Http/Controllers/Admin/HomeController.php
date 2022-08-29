@@ -20,7 +20,8 @@ class HomeController extends Controller
     {
         // $user = User::findOrFail($id);
         $user = Auth::user();
-        return view('admin.home', compact('user'));
+        $user_id = $user->id;
+        return view('admin.home', compact('user', 'user_id'));
     }
 
     /**
@@ -55,7 +56,7 @@ class HomeController extends Controller
         $user_id = Crypt::decrypt($id);
         $products = Product::where('user_id', '=', $user_id)->get();
         $user = Auth::user();
-        return view('admin.show', compact('products', 'user'));
+        return view('admin.show', compact('products', 'user', 'user_id'));
     }
 
     /**
