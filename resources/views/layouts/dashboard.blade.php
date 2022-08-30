@@ -73,6 +73,12 @@
 								Aggiungi un nuovo prodotto
 							</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('admin.orders') }}">
+								<i class="fas fa-plus-square"></i>
+								Visualizza ordini
+							</a>
+						</li>
 						{{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.categories.index') }}">
                                 <i class="fas fa-list-ul"></i>
