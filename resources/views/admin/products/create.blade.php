@@ -15,9 +15,9 @@
 	<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		@method('POST')
-		<div class="mb-3">
+		{{-- <div class="mb-3">
 			<input type="number" class="form-control" id="user_id" name="user_id" value="{{ $user_id }}" hidden>
-		</div>
+		</div> --}}
 		<div class="mb-3">
 			<label for="name" class="form-label">Product Name</label>
 			<input type="text" class="form-control" id="name" name="name">

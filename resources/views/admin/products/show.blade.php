@@ -15,14 +15,14 @@
         <p>Prezzo: €{{ $product->price }}</p>
         <p>Descrizione: {{ $product->description }}</p>
         <p>Ingredienti: {{ $product->ingredients }}</p>
-        <p>{{ $product->visibility }}</p>
+        <p class="d-none">{{ $product->visibility }}</p>
     </div>
 
 
 
-    <p>{{ $product->content }}</p>
+    {{-- <p>{{ $product->content }}</p> --}}
 
-    <a href="{{ route('admin.products.edit', ['id' => Crypt::encrypt($user->id), 'slug' => $product->slug]) }}"
+    <a href="{{ route('admin.products.edit', ['slug' => $product->slug]) }}"
         class="btn btn-primary">Modifica Piatto</a>
 
     <form action="{{ route('admin.products.destroy', ['id' => $product->id]) }}" method="POST">

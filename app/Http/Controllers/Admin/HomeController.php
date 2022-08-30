@@ -53,10 +53,10 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $user_id = Crypt::decrypt($id);
-        $products = Product::where('user_id', '=', $user_id)->get();
-        $user = Auth::user();
-        return view('admin.show', compact('products', 'user', 'user_id'));
+        // $user_id = Crypt::decrypt($id);
+        // $products = Product::where('user_id', '=', $user_id)->get();
+        // $user = Auth::user();
+        // return view('admin.show', compact('products', 'user', 'user_id'));
     }
 
     /**

@@ -18,10 +18,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $products = Product::where('user_id', '=', $id)->get();
-        return view('admin.products.index', compact('products'));
+        $user = Auth::user();
+        $user_id = $user->id;
+        $products = Product::where('user_id', '=', $user_id)->get();
+        return view('admin.show', compact('products', 'user_id'));
     }
 
     /**
@@ -29,13 +31,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         $user = Auth::user();
-
-        $user_id = Crypt::decrypt($id);
+        $user_id = $user->id;
         return view('admin.products.create', compact('user_id'));
-        dd($id);
     }
 
     /**
@@ -47,13 +47,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $user = Auth::user();
+        $data['user_id'] = $user->id;
         $image_path = Storage::put('products_imgs', $data['img']);
         $data['img'] = $image_path;
         $product = new Product();
         $product->fill($data);
         $product->slug = Product::generateSlug($product->name);
         $product->save();
-        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => Crypt::encrypt($product->user_id)]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug]);
     }
 
     /**
@@ -62,10 +64,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug, $id)
+    public function show($slug)
     {
         $user = Auth::user();
-        $user_id = Crypt::decrypt($id);
+        $user_id = $user->id;
         // $user_id = $user->id;
         $product = Product::where('slug', '=', $slug)->where('user_id', '=', $user_id)->first();
         // dd($user_id);
@@ -78,10 +80,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug, $id)
+    public function edit($slug)
     {
         $user = Auth::user();
-        $user_id = Crypt::decrypt($id);
+        $user_id = $user->id;
         $product = Product::where('slug', '=', $slug)->first();
         return view('admin.products.edit', compact('product', 'user', 'user_id'));
     }
@@ -95,8 +97,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
+        $user_id = $user->id;
         $data = $request->all();
-        $product = Product::where('id', '=', $id)->first();
+        $data['user_id'] = $user_id;
+        $product = Product::where('id', '=', $id)->where('user_id', '=', $user_id)->first();
         if (isset($data['img'])) {
             if ($product->img) {
                 Storage::delete($product->img);
@@ -109,7 +114,7 @@ class ProductController extends Controller
             $product->slug = $data['slug'];
         }
         $product->update($data);
-        return redirect()->route('admin.products.show', ['slug' => $product->slug, 'id' => Crypt::encrypt($product->user_id)]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug]);
     }
 
     /**
@@ -128,6 +133,6 @@ class ProductController extends Controller
         $product->delete();
         $user = Auth::user();
         $user_id = $user->id;
-        return redirect()->route('admin.products', ['id' => Crypt::encrypt($user->id)]);
+        return redirect()->route('admin.products');
     }
 }

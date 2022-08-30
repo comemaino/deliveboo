@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap justify-content-between p-0">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Boolpress</a>
 		<ul class="navbar-nav px-3 ml-auto">
 			{{-- <li class="nav-item">
@@ -62,13 +62,13 @@
                                 <i class="fas fa-border-all"></i>
                                 Tutti i Prodotti
                             </a> --}}
-							<a class="nav-link" href="{{ route('admin.products', ['id' => Crypt::encrypt($user_id)]) }}">
+							<a class="nav-link" href="{{ route('admin.products') }}">
 								<i class="fas fa-border-all"></i>
 								Tutti i Prodotti
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('admin.products.create', ['id' => Crypt::encrypt($user_id)]) }}">
+							<a class="nav-link" href="{{ route('admin.products.create') }}">
 								<i class="fas fa-plus-square"></i>
 								Aggiungi un nuovo prodotto
 							</a>

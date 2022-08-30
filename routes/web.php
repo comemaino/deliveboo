@@ -42,12 +42,12 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
-        Route::get('/products/{id}', 'HomeController@show')->name('products');
-        Route::get('/products/create/{id}', 'ProductController@create')->name('products.create');
+        Route::get('/products', 'ProductController@index')->name('products');
+        Route::get('/products/create', 'ProductController@create')->name('products.create');
         // Route::resource('products', 'ProductController');
         Route::post('/products/store', 'ProductController@store')->name('products.store');
-        Route::get('/products/{slug}/{id}', 'ProductController@show')->name('products.show');
-        Route::get('/products/edit/{slug}/{id}', 'ProductController@edit')->name('products.edit');
+        Route::get('/products/{slug}', 'ProductController@show')->name('products.show');
+        Route::get('/products/edit/{slug}', 'ProductController@edit')->name('products.edit');
         Route::put('/products/update/{id}', 'ProductController@update')->name('products.update');
         Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
     });

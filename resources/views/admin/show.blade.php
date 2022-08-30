@@ -12,7 +12,7 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ $product->name }}</h5>
 						<p class="card-text">{{ $product->ingredients }}</p>
-						<a href="{{ route('admin.products.show', ['id' => Crypt::encrypt($user->id), 'slug' => $product->slug]) }}"
+						<a href="{{ route('admin.products.show', ['slug' => $product->slug]) }}"
 							class="btn btn-primary">Dettagli Piatto</a>
 					</div>
 				</div>
