@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Auth::routes();
 
 // Authentication Routes...
@@ -52,3 +48,7 @@ Route::middleware('auth')
         Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
         Route::get('/orders', 'OrderController@index')->name('orders');
     });
+
+Route::get('{any?}', function() {
+    return view('guest.home');
+})->where('any', '.*');
