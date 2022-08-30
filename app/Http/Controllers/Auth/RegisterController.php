@@ -55,7 +55,20 @@ class RegisterController extends Controller
 
     public function userRegistration(Request $request) 
     {
-        // $request->$this->validator();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'business_name' => 'required|string|unique:users',
+            'category_id' => 'exists:categories,id',
+            'address' => 'required|string',
+            'vat' => 'required|string|digits:11',
+            'cover' => 'nullable|string',
+        ]);
+        // dd($validator);
+        if ($validator->fails()) {
+            return redirect('register')->withErrors($validator)->withInput();
+        }
         $data = $request->all();
         $user = new User();
         $user->fill($data);
@@ -81,15 +94,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // return Validator::make($data, [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'business_name' => ['required', 'string'],
+        //     'slug' => ['required', 'string'],
+        //     'address' => ['required', 'string'],
+        //     'vat' => ['required', 'string', 'digits:11'],
+        //     'cover' => ['text'],
+        // ]);
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'business_name' => ['required', 'string'],
-            'slug' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'vat' => ['required', 'string', 'digits:11'],
-            'cover' => ['text']
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'business_name' => 'required|string',
+            'slug' => 'required|string',
+            'address' => 'required|string',
+            'vat' => 'required|string|digits:11',
+            'cover' => 'text',
         ]);
     }
 

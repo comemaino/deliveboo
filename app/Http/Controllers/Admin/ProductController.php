@@ -46,6 +46,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->getValidationRules());
         $data = $request->all();
         $user = Auth::user();
         $data['user_id'] = $user->id;
@@ -97,6 +98,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->getValidationRules());
         $user = Auth::user();
         $user_id = $user->id;
         $data = $request->all();
@@ -131,8 +133,18 @@ class ProductController extends Controller
             Storage::delete($product->img);
         }
         $product->delete();
-        $user = Auth::user();
-        $user_id = $user->id;
         return redirect()->route('admin.products');
     }
+
+    private function getValidationRules() {
+        return [
+            'name' => 'required|min:3|max:255',
+            'img' => 'max:30000',
+            'price' => 'required',
+            'description' => 'nullable|max:30000',
+            'ingredients' => 'required|min:3|max:30000',
+            'visibility' => 'required'
+        ];
+    }
+
 }

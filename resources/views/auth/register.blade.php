@@ -15,9 +15,19 @@ dd($categories);
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
+                            {{-- @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif --}}
+
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Name*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -34,7 +44,7 @@ dd($categories);
 
                             <div class="form-group row">
                                 <label for="business_name" class="col-md-4 col-form-label text-md-right">Business
-                                    name</label>
+                                    name*</label>
 
                                 <div class="col-md-6">
                                     <input id="business_name" type="text"
@@ -51,7 +61,7 @@ dd($categories);
                             </div>
 
                             <div class="form-group row">
-                                <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
+                                <label for="address" class="col-md-4 col-form-label text-md-right">Address*</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text"
@@ -66,12 +76,13 @@ dd($categories);
                                 </div>
                             </div>
 
-                            <h5>Categories</h5>
+                            <h6>Categories*</h6>
                             <div class="form-check row">
                                 @foreach ($categories as $category)
                                     <div class="form-check">
-                                        <input name="categories[]" class="form-check-input" type="checkbox"
-                                            value="{{ $category->id }}" id="category-{{ $category->id }}"
+                                        <input name="categories[]"
+                                            class="form-check-input @error('category_id') is-invalid @enderror"
+                                            type="checkbox" value="{{ $category->id }}" id="category-{{ $category->id }}"
                                             {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="category-{{ $category->id }}">
 
@@ -82,7 +93,7 @@ dd($categories);
                             </div>
 
                             <div class="form-group row">
-                                <label for="vat" class="col-md-4 col-form-label text-md-right">Vat</label>
+                                <label for="vat" class="col-md-4 col-form-label text-md-right">Vat*</label>
 
                                 <div class="col-md-6">
                                     <input id="vat" type="text"
@@ -106,7 +117,7 @@ dd($categories);
                                 <div class="col-md-6">
                                     <input id="cover" type="file"
                                         class="form-control @error('cover') is-invalid @enderror" name="cover"
-                                        value="{{ old('cover') }}" required autocomplete="cover" autofocus>
+                                        value="{{ old('cover') }}" autocomplete="cover" autofocus>
 
                                     @error('cover')
                                         <span class="invalid-feedback" role="alert">
@@ -118,7 +129,7 @@ dd($categories);
 
                             <div class="form-group row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -135,7 +146,7 @@ dd($categories);
 
                             <div class="form-group row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -152,7 +163,7 @@ dd($categories);
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"

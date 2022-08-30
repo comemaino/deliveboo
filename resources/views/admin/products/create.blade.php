@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-	{{-- @if ($errors->any())
+	@if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -9,7 +9,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif --}}
+    @endif
 
 
 	<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
@@ -19,7 +19,7 @@
 			<input type="number" class="form-control" id="user_id" name="user_id" value="{{ $user_id }}" hidden>
 		</div> --}}
 		<div class="mb-3">
-			<label for="name" class="form-label">Product Name</label>
+			<label for="name" class="form-label">Product Name*</label>
 			<input type="text" class="form-control" id="name" name="name">
 		</div>
 		<div class="mb-3">
@@ -27,11 +27,11 @@
 			<input type="file" class="form-control" id="img" name="img">
 		</div>
 		<div class="mb-3">
-			<label for="price" class="form-label">Product Price</label>
+			<label for="price" class="form-label">Product Price*</label>
 			<input type="number" step='.01' class="form-control" id="price" name="price">
 		</div>
 		<div class="mb-3">
-			<label for="ingredients" class="form-label">Product Ingredients</label>
+			<label for="ingredients" class="form-label">Product Ingredients*</label>
 			<input type="text" class="form-control" id="ingredients" name="ingredients">
 		</div>
 		<div class="mb-3">
@@ -43,16 +43,17 @@
             <label class="form-check-label" for="visibility">Product Visibility</label>
         </div> --}}
 		<div class="mb-3">
+			<h6>Visibility*</h6>
 			<div class="form-check">
 				<input class="form-check-input" type="radio" name="visibility" id="visibility" value="1">
 				<label class="form-check-label" for="visibility">
-					Visibility ON
+					ON
 				</label>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="radio" name="visibility" id="visibility" value="0">
 				<label class="form-check-label" for="visibility">
-					Visibility OFF
+					OFF
 				</label>
 			</div>
 		</div>
