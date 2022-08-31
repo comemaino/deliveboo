@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $restaurants = User::all();
+        $restaurants = [];
+        if($id == 17) {
+            $restaurants = User::all();
+        } else {
+            $category = Category::findOrFail($id)->with(['users'])->first();
+            $restaurants = $category;
+        };
         $categories=Category::all();
         return response()->json([
             "success" => true,

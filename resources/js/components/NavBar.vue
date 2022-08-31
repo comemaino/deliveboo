@@ -1,32 +1,30 @@
 <template>
-  <nav>
-    <!-- <input v-for="category in categories" :key="category.id">{{category.name}}> -->
-    <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
-    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  :value="category.id">
-    <label class="form-check-label" for="inlineRadio1">{{category.name}}</label>
-    </div>
-  </nav>
+    <nav>
+        <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
+            <span @click="getSelectedCategory(category.id)" >{{ category.name }}</span>
+        </div>
+    </nav>
 </template>
 
 <script>
 export default {
-    name:"NavBar",
-    props:{
+    name: "NavBar",
+    props: {
         categories: Array,
     },
     data() {
-        return{
-            selectedCategory:null,
+        return {
+            selectedCategory: null,
         }
     },
-    methods:{
-        getSelectedCategory(){
-
+    methods: {
+        getSelectedCategory(id) {
+            this.selectedCategory = id;
+            this.$emit('selectedCategory', this.selectedCategory);
         }
     },
 }
 </script>
 
 <style>
-
 </style>

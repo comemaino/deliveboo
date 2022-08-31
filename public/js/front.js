@@ -5166,6 +5166,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppRestaurants",
+  // data() {
+  //     return{
+  //         restaurants: []
+  //     }
+  // },
   components: {
     CardRestaurant: _CardRestaurant_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -5189,6 +5194,9 @@ __webpack_require__.r(__webpack_exports__);
   name: "CardRestaurant",
   props: {
     restaurant: Object
+  },
+  created: function created() {
+    console.log(this.restaurant);
   }
 });
 
@@ -5214,7 +5222,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getSelectedCategory: function getSelectedCategory() {}
+    getSelectedCategory: function getSelectedCategory(id) {
+      this.selectedCategory = id;
+      this.$emit('selectedCategory', this.selectedCategory);
+    }
   }
 });
 
@@ -5233,6 +5244,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_AppRestaurants_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AppRestaurants.vue */ "./resources/js/components/AppRestaurants.vue");
 /* harmony import */ var _components_NavBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/NavBar.vue */ "./resources/js/components/NavBar.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 
 
 
@@ -5249,15 +5262,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.getRestaurants();
+    this.getRestaurants(17);
   },
   methods: {
-    getRestaurants: function getRestaurants() {
+    getRestaurants: function getRestaurants(id) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api").then(function (resp) {
-        _this.restaurants = resp.data.results.restaurants;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/".concat(id)).then(function (resp) {
+        var results = resp.data.results.restaurants;
+        console.log(_typeof(results));
+        _this.restaurants = resp.data.results.restaurants; // if(typeof resp.data.results.restaurants === 'array') {
+        // } else {
+        //   this.restaurants = [];
+        //   this.restaurants.push(resp.data.results.restaurants);
+        // }
+
         _this.categories = resp.data.results.categories;
+        console.log(resp.data.results);
       });
     }
   }
@@ -5398,13 +5419,6 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
     staticClass: "card",
     staticStyle: {
@@ -5420,15 +5434,17 @@ var staticRenderFns = [function () {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v("Card title")]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.restaurant.business_name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's\n            content.")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary",
     attrs: {
       href: "#"
     }
   }, [_vm._v("Go somewhere")])])]);
-}];
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -5453,20 +5469,11 @@ var render = function render() {
     return _c("div", {
       key: category.id,
       staticClass: "form-check form-check-inline"
-    }, [_c("input", {
-      staticClass: "form-check-input",
-      attrs: {
-        type: "radio",
-        name: "inlineRadioOptions",
-        id: "inlineRadio1"
-      },
-      domProps: {
-        value: category.id
-      }
-    }), _vm._v(" "), _c("label", {
-      staticClass: "form-check-label",
-      attrs: {
-        "for": "inlineRadio1"
+    }, [_c("span", {
+      on: {
+        click: function click($event) {
+          return _vm.getSelectedCategory(category.id);
+        }
       }
     }, [_vm._v(_vm._s(category.name))])]);
   }), 0);
@@ -5496,6 +5503,11 @@ var render = function render() {
   return _c("div", [_c("NavBar", {
     attrs: {
       categories: _vm.categories
+    },
+    on: {
+      selectedCategory: function selectedCategory($event) {
+        return _vm.getRestaurants($event);
+      }
     }
   }), _vm._v(" "), _c("h1", [_vm._v("Home")]), _vm._v(" "), _c("AppRestaurants", {
     attrs: {
@@ -58307,7 +58319,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/lucabodasca/Downloads/BOOLEAN/Boolean-Laravel/Deliveboo/deliveboo/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\fede1\Documents\Boolean\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
