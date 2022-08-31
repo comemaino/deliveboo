@@ -1,0 +1,50 @@
+- ProductController
+
+<?php
+    public function addToCart(Request $request){
+    $product_data= $request->all();
+    $product_id = $product_data['id'];
+    $product_quantity = $product_data['quantity'];
+    $product = Product::findOrFail($product_id);
+
+    $cart = Session::get('cart');
+    for($i = 0; $i < $product_quanity; $i++) {
+        $cart[] = $product;
+    }
+    Session::push('cart', $cart);
+
+    return response()->json(['success' => true, 'cart_items' => Session::get('cart')]);
+}
+
+
+- JS/VUE
+
+axios
+        .post("/api/add-to-cart", {
+          id: this.selectedCategory,
+          quantity: 2
+        })
+        .then((resp) => {
+          if (resp.data.success) {
+		...
+          }
+        });
+
+
+- ROUTE
+
+Route::post('api/add-to-cart','ProductController@addToCart');
+
+
+- Kernel
+
+\Illuminate\Session\Middleware\StartSession::class
+
+$data = $request->session()->all();
+
+$request->session()->has('users')
+
+$request->session()->put('key', 'value')
+
+
+
