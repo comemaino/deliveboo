@@ -1,8 +1,14 @@
 <template>
   <div>
-    <NavBar :categories="categories" @selectedCategory="getRestaurants($event)" />
+    <NavBar
+      :categories="categories"
+      @selectedCategory="getRestaurants($event)"
+    />
     <h1>Home</h1>
-    <AppRestaurants :restaurants="restaurants" />
+    <div class="container">
+      <AppRestaurants :restaurants="restaurants" />
+
+    </div>
   </div>
 </template>
 
@@ -21,6 +27,7 @@ export default {
     return {
       restaurants: [],
       categories: [],
+      // categories_id = []
     };
   },
   created() {
@@ -28,19 +35,12 @@ export default {
   },
   methods: {
     getRestaurants(id) {
+      // this.categories_id.push = id;
       axios
         .get(`/api/${id}`)
         .then((resp) => {
-          const results = resp.data.results.restaurants;
-          console.log(typeof results);
           this.restaurants = resp.data.results.restaurants;
-          // if(typeof resp.data.results.restaurants === 'array') {
-          // } else {
-          //   this.restaurants = [];
-          //   this.restaurants.push(resp.data.results.restaurants);
-          // }
           this.categories = resp.data.results.categories;
-          console.log(resp.data.results);
         });
     },
     

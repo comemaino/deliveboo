@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -70,18 +71,20 @@ class RegisterController extends Controller
             return redirect('register')->withErrors($validator)->withInput();
         }
         $data = $request->all();
+        // $image_path = Storage::put('users_img', $data['cover']);
+        // $data['cover'] = $image_path;
         $user = new User();
         $user->fill($data);
         $user->slug = Str::slug($user->business_name);
         $user->password = Hash::make($user->password);
         $user->save();
-
+        
         if(isset($data['categories'])) {
             $user->categories()->sync($data['categories']);
         }
-
+        
         $this->guard()->login($user);
-
+        
         return redirect()->route('admin.home');
 
     }
