@@ -13,11 +13,11 @@ class OrdersTableSeeder extends Seeder
     public function run()
     {
         $order = [
-            "user_id" => 13,
-            "amount" => 12.99,
+            "user_id" => 1,
+            "amount" => 14,00,
             "state" => 1,
-            "customer_fullname" => "Ciccio",
-            "customer_email" => "ciccio@email.it",
+            "customer_fullname" => "Marta",
+            "customer_email" => "marta.temao@email.it",
             "customer_address" => "via isonzo"
         ];
 

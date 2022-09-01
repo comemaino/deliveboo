@@ -132,6 +132,7 @@ class ProductController extends Controller
         if ($product->img) {
             Storage::delete($product->img);
         }
+        $product->orders()->sync([]);
         $product->delete();
         return redirect()->route('admin.products');
     }
