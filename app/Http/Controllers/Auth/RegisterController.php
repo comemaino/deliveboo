@@ -71,6 +71,8 @@ class RegisterController extends Controller
             return redirect('register')->withErrors($validator)->withInput();
         }
         $data = $request->all();
+        $image_path = Storage::put('users_covers', $data['cover']);
+        $data['cover'] = $image_path;
         $user = new User();
         $user->fill($data);
         $user->slug = Str::slug($user->business_name);
