@@ -71,30 +71,18 @@ class RegisterController extends Controller
             return redirect('register')->withErrors($validator)->withInput();
         }
         $data = $request->all();
-<<<<<<< HEAD
-        $image_path = Storage::put('users_covers', $data['cover']);
-        $data['cover'] = $image_path;
-=======
-        // $image_path = Storage::put('users_img', $data['cover']);
-        // $data['cover'] = $image_path;
->>>>>>> master
         $user = new User();
         $user->fill($data);
         $user->slug = Str::slug($user->business_name);
         $user->password = Hash::make($user->password);
         $user->save();
-<<<<<<< HEAD
 
         if (isset($data['categories'])) {
-=======
-        
-        if(isset($data['categories'])) {
->>>>>>> master
             $user->categories()->sync($data['categories']);
         }
-        
+
         $this->guard()->login($user);
-        
+
         return redirect()->route('admin.home');
     }
 
