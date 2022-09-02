@@ -14,6 +14,7 @@ const router = new VueRouter({
     mode: "history",
     routes: [
 
+
         { path: '/restaurantMenu', name: 'RestaurantMenu', component: RestaurantMenu},
 
         { 
