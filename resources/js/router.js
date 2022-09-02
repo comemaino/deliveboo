@@ -14,14 +14,18 @@ const router = new VueRouter({
     mode: "history",
     routes: [
 
-
-        { path: '/restaurantMenu', name: 'RestaurantMenu', component: RestaurantMenu},
-
         { 
             path: '/', 
             name: 'home', 
             component: Home 
         },
+
+        { 
+            path: '/:slug', 
+            name: 'RestaurantMenu',
+            component: RestaurantMenu
+        },
+
         {
             path:'/*',
             name:'not-found',

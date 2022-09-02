@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::get('/{id}', 'Api\HomeController@index')->name('api.restaurants.index');
+Route::get('/{slug}/menu', 'Api\HomeController@show')->name('api.restaurants.show');

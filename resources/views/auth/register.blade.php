@@ -75,7 +75,7 @@
 							<h6>Categorie *</h6>
 							<div class="checkbox-group form-check d-flex flex-wrap">
 								@foreach ($categories as $category)
-									<div class="form-check d-inline-block w-25">
+									<div class="checkbox-container form-check d-inline-block w-25">
 										<input name="categories[]" class=" form-check-input @error('category_id') is-invalid @enderror" type="checkbox"
 											value="{{ $category->id }}" id="category-{{ $category->id }}"
 											{{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
@@ -164,7 +164,7 @@
 
 							<div class="form-group row mb-0">
 								<div class="col-md-6 offset-md-4">
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-primary" id="submit">
 										{{ __('Register') }}
 									</button>
 								</div>
@@ -175,4 +175,15 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		const btn = document.getElementById('submit');
+		btn.addEventListener('click', function() {
+			let cb_length = document.querySelectorAll(".checkbox-container input[type ='checkbox']:checked").length
+			console.log(cb_length);
+			if (cb_length <= 0) {
+				alert('Seleziona almeno una categoria')
+			}
+		})
+	</script>
 @endsection

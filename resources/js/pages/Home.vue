@@ -35,7 +35,7 @@ export default {
     getRestaurants(id) {
         let cat;
         if (!id) {
-            cat = '17';
+            cat = id;
             this.categories_id = [];
         } else {
             this.categories_id.push(id);
