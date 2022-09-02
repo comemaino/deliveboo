@@ -1,11 +1,10 @@
 <template>
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card mb-2" style="width: 18rem;">
+        <img class="card-img-top" :src="'../storage/' + restaurant.cover" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.business_name }}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p class="card-text">{{ restaurant.address }}</p>
+            <router-link :to="{ name: 'RestaurantMenu'}" class="btn btn-primary">Menù Ristorante</router-link>
         </div>
     </div>
 </template>

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -53,37 +54,48 @@ class RegisterController extends Controller
         return view('auth.register', compact('categories'));
     }
 
-    public function userRegistration(Request $request) 
+    public function userRegistration(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'business_name' => 'required|string|unique:users',
             'category_id' => 'exists:categories,id',
             'address' => 'required|string',
-            'vat' => 'required|string|digits:11',
-            'cover' => 'nullable|string',
+            'vat' => 'required|numeric|digits:11',
+            'cover' => 'nullable',
         ]);
         // dd($validator);
         if ($validator->fails()) {
             return redirect('register')->withErrors($validator)->withInput();
         }
         $data = $request->all();
+<<<<<<< HEAD
+        $image_path = Storage::put('users_covers', $data['cover']);
+        $data['cover'] = $image_path;
+=======
+        // $image_path = Storage::put('users_img', $data['cover']);
+        // $data['cover'] = $image_path;
+>>>>>>> master
         $user = new User();
         $user->fill($data);
         $user->slug = Str::slug($user->business_name);
         $user->password = Hash::make($user->password);
         $user->save();
+<<<<<<< HEAD
 
+        if (isset($data['categories'])) {
+=======
+        
         if(isset($data['categories'])) {
+>>>>>>> master
             $user->categories()->sync($data['categories']);
         }
-
+        
         $this->guard()->login($user);
-
+        
         return redirect()->route('admin.home');
-
     }
 
     /**
@@ -94,16 +106,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // return Validator::make($data, [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //     'business_name' => ['required', 'string'],
-        //     'slug' => ['required', 'string'],
-        //     'address' => ['required', 'string'],
-        //     'vat' => ['required', 'string', 'digits:11'],
-        //     'cover' => ['text'],
-        // ]);
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',

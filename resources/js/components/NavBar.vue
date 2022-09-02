@@ -1,7 +1,7 @@
 <template>
     <nav>
         <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
-            <span @click="getSelectedCategory(category.id)" >{{ category.name }}</span>
+            <span @click="getSelectedCategory(category.id)" :class=" category.id === selectedCategory ? 'active' : ''">{{ category.name }}</span>
         </div>
     </nav>
 </template>
@@ -26,5 +26,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.active {
+    color: red;
+}
 </style>
