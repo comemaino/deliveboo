@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
             'asian',
             'fusion',
             'italiano',
-            'brasiliano',
+            'piadina',
             'indiano',
             'cingalese',
             'fast-food',

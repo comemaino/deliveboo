@@ -37,13 +37,20 @@ export default {
         if (!id) {
             cat = id;
             this.categories_id = [];
+        } else if (this.categories_id.includes(id)) {
+          this.categories_id = this.categories_id.filter(cat => cat !== id)
+          if (this.categories_id.length < 1 ) {
+            cat = null;
+          } else {
+            cat = this.categories_id.join();
+          }
         } else {
-            this.categories_id.push(id);
+          this.categories_id.push(id);
             cat = this.categories_id.join();
         }
-        console.log(cat);
+          console.log(cat);
+
       axios.get(`/api/${cat}`).then((resp) => {
-        console.log(resp);
         this.restaurants = resp.data.results.restaurants;
         // if(typeof resp.data.results.restaurants === 'array') {
         // } else {
@@ -51,7 +58,6 @@ export default {
         //   this.restaurants.push(resp.data.results.restaurants);
         // }
         this.categories = resp.data.results.categories;
-        console.log(resp.data.results);
       });
     },
   },

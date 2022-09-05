@@ -91,8 +91,9 @@
 								<label for="vat" class="col-md-4 col-form-label text-md-right">P. IVA*</label>
 
 								<div class="col-md-6">
-									<input id="vat" type="text" maxlength="11" class="form-control @error('vat') is-invalid @enderror"
-										pattern="[0-9]{11}" name="vat" value="{{ old('vat') }}" required autocomplete="vat" autofocus>
+									<input id="vat" type="text" inputmode="numeric" maxlength="11"
+										class="form-control @error('vat') is-invalid @enderror" pattern="[0-9]{11}" name="vat"
+										value="{{ old('vat') }}" required autocomplete="vat" autofocus>
 
 									@error('vat')
 										<span class="invalid-feedback" role="alert">
