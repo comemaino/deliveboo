@@ -8,11 +8,13 @@
           <input
             type="number"
             name="product_quantity"
-            :id="'product-quantity-'+ product.id"
+            :id="'product-quantity-' + product.id"
             :value="product.productQuantity"
             @change="addMore(product), getAmount()"
           />
-          <span class="amount">€ {{ product.price * product.productQuantity }}</span>
+          <span class="amount"
+            >€ {{ product.price * product.productQuantity }}</span
+          >
         </li>
       </ul>
       <h5>Totale: € {{ cartAmount }}</h5>
@@ -28,9 +30,12 @@
 <script>
 export default {
   name: "Cart",
+  props: {
+    theseProducts: Array,
+  },
   data() {
     return {
-      theseProducts: [],
+      theseProductsArray: [],
       cartAmount: 0,
     };
   },
@@ -38,7 +43,7 @@ export default {
     if (localStorage.cart) {
       console.log(JSON.parse(localStorage.cart));
       const thisCart = JSON.parse(localStorage.cart);
-      this.theseProducts = thisCart.productsArray;
+      // this.theseProducts = thisCart.productsArray;
     }
 
     this.getAmount();
@@ -46,21 +51,40 @@ export default {
   methods: {
     resetCart() {
       localStorage.cart = "";
+      this.theseProductsArray = [];
+      this.cartAmount = 0;
     },
     addMore(product) {
-      const quantity = document.getElementById('product-quantity-'+ product.id).value;
-      product.productQuantity = quantity;
+      const index = this.theseProductsArray.indexOf(product);
+      const quantity = parseInt(
+        document.getElementById("product-quantity-" + product.id).value
+      );
+      const selectedProduct = this.theseProductsArray[index];
+      selectedProduct.productQuantity = quantity;
+      const cart = JSON.parse(localStorage.cart);
+      cart.productsArray = this.theseProductsArray;
+      localStorage.cart = JSON.stringify(cart);
     },
     getAmount() {
       let amount = 0;
-      this.theseProducts.forEach((product) => {
+      this.theseProductsArray.forEach((product) => {
         let result = 0;
-        result = product.price * product.productQuantity
+        result = product.price * product.productQuantity;
         amount += result;
-      })
+      });
       this.cartAmount = parseFloat(amount.toFixed(2));
-    }
+    },
   },
+  watch: {
+    theseProducts(newProduct) {
+      if (this.theseProductsArray.includes(newProduct)) {
+        this.addMore(newProduct);
+      } else {
+        this.theseProductsArray.push(newProduct);
+      }
+      this.getAmount();
+    }
+  }
 };
 </script>
 

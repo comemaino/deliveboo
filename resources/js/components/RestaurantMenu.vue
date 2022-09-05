@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="col-3">
-          <Cart />
+          <Cart :theseProducts="cart.productsArray" />
         </div>
       </div>
     </template>
