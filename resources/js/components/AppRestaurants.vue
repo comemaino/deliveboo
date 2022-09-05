@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="restaurant in restaurants" :key="restaurant.id">
+    <div class="ms_container d-flex flex-wrap">
+        <div v-for="restaurant in restaurants" :key="restaurant.id" class="m-2">
             <CardRestaurant :restaurant="restaurant" />            
         </div>
     </div>
@@ -24,5 +24,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.ms_container {
+    width: 80%;
+    margin: 0 auto;
+}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <NavBar :categories="categories" @selectedCategory="getRestaurants($event)" />
-    <h1>Home</h1>
     <AppRestaurants :restaurants="restaurants" />
   </div>
 </template>

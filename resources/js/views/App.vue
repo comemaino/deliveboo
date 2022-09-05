@@ -1,7 +1,6 @@
 <template>
     <div class="client_side">
       <AppHeader />
-      <h1>Guest</h1>
       <router-view></router-view>
     </div>
 </template>
