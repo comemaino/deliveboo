@@ -5,9 +5,9 @@
       <ul>
         <li v-for="(product, index) in getUpdatedProducts" :key="index">
           <span>{{ product.name }}</span>
-          <button @click="addMore(product)">Add</button>
+          <button class="btn btn-danger" @click="remove(product)">-</button>
           <span>{{ product.productQuantity }}</span>
-          <button @click="remove(product)">Remove</button>
+          <button class="btn btn-success" @click="addMore(product)">+</button>
           <!-- <input
             type="number"
             name="product_quantity"
@@ -25,6 +25,9 @@
     <div class="">
       <button class="btn btn-danger" @click="resetCart()">
         Svuota carrello
+      </button>
+      <button class="btn btn-success" @click="resetCart()">
+        Checkout
       </button>
     </div>
   </div>

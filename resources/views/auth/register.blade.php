@@ -8,7 +8,8 @@
 					<div class="card-header">{{ __('Register') }}</div>
 
 					<div class="card-body">
-						<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+						<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="needs-validation"
+							novalidate>
 							@csrf
 							@method('POST')
 
@@ -76,7 +77,7 @@
 							<div class="checkbox-group form-check d-flex flex-wrap">
 								@foreach ($categories as $category)
 									<div class="checkbox-container form-check d-inline-block w-25">
-										<input name="categories[]" class=" form-check-input @error('category_id') is-invalid @enderror" type="checkbox"
+										<input name="categories[]" class=" form-check-input @error('category_id') :invalid @enderror" type="checkbox"
 											value="{{ $category->id }}" id="category-{{ $category->id }}"
 											{{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
 										<label class="form-check-label text-capitalize" for="category-{{ $category->id }}">
