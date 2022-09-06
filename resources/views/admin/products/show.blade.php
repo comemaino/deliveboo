@@ -1,6 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+	@if (session()->has('message'))
+		<div id="flash-message" class="alert alert-success">
+			<h5 class="text-center">{{ session()->get('message') }}</h5>
+		</div>
+	@endif
+
 	<h1>{{ $product->name }}</h1>
 
 	@if ($product->img)

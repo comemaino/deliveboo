@@ -4,5 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- require('./bootstrap');
+require('./bootstrap');
+
+if (document.getElementById('flash-message')) {
+    const thisAlert = document.getElementById('flash-message');
+    thisAlert.addEventListener('click', function () {
+        thisAlert.classList.add('d-none');
+    })
+}
 

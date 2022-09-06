@@ -56,7 +56,7 @@ class ProductController extends Controller
         $product->fill($data);
         $product->slug = Product::generateSlug($product->name);
         $product->save();
-        return redirect()->route('admin.products.show', ['slug' => $product->slug]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug])->with('message', 'Prodotto creato con successo!');
     }
 
     /**
@@ -122,7 +122,7 @@ class ProductController extends Controller
             $product->slug = $data['slug'];
         }
         $product->update($data);
-        return redirect()->route('admin.products.show', ['slug' => $product->slug]);
+        return redirect()->route('admin.products.show', ['slug' => $product->slug])->with('message', 'Prodotto modificato con successo!');
     }
 
     /**
@@ -140,7 +140,7 @@ class ProductController extends Controller
         }
         $product->orders()->sync([]);
         $product->delete();
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.products')->with('message', 'Prodotto eliminato con successo!');
     }
 
     private function getValidationRules() {
