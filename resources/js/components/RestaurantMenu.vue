@@ -6,7 +6,7 @@
           <div>
             <h2>Menù di {{ restaurant.business_name }}</h2>
             <div class="row row-cols-4">
-              <div v-for="product in products" :key="product.id">
+              <div v-for="(product, index) in products" :key="product.id">
                 <div class="card mb-2" style="width: 18rem">
                   <img
                     class="card-img-top"
@@ -23,11 +23,12 @@
                         type="number"
                         name="product_quantity"
                         :id="'input' + product.id"
-                        value=""
+                        min="1"
+                        v-model="quantity_id[index]"
                       />
                       <button
                         class="btn btn-success"
-                        @click="addToCart(product)"
+                        @click="addToCart(product, index)"
                       >
                         Aggiungi al carrello
                       </button>
@@ -39,7 +40,7 @@
           </div>
         </div>
         <div class="col-3">
-          <Cart :theseProducts="cart.productsArray" />
+          <Cart @empty="resetCart()" :theseProducts="cart" />
         </div>
       </div>
     </template>
@@ -60,9 +61,8 @@ export default {
       loading: false,
       restaurant: null,
       products: [],
-      cart: {
-        productsArray: [],
-      },
+      cart: [],
+      quantity_id: [],
     };
   },
   created() {
@@ -72,11 +72,13 @@ export default {
   mounted() {
     if (localStorage.cart) {
       // const cartAsArray = localStorage.cart.split(",");
-      const cartAsArray = JSON.parse(localStorage.cart);
-      console.log(cartAsArray);
-      this.cart = cartAsArray;
+      // const cartAsArray = JSON.parse(localStorage.cart);
+      // console.log(cartAsArray);
+      // this.cart = cartAsArray;
       // localStorage.cart = '';
       // console.log(this.cartProducts);
+      this.cart = JSON.parse(localStorage.cart);
+      // localStorage.cart = '';
     }
   },
   methods: {
@@ -90,33 +92,61 @@ export default {
       });
     },
 
-    addToCart(item) {
-      // if (this.cartProducts.length > 0 && this.cartProducts[0].user_id !== user_id) {
-      //   alert('Non puoi aggiungere articoli di ristoranti diversi')
-      // } else {
-      // if (product.user_id)
-      let checkResult = this.cart.productsArray.filter((element) => element.id === item.id ? true : false);
-      if (checkResult.length !== 0) {
-        checkResult[0].productQuantity++;
-        console.log(checkResult[0]);
-      } else {
-        let productQuantity;
-        if (!document.getElementById("input" + item.id).value) {
-          productQuantity = 1;
-        } else {
-          productQuantity = parseInt(document.getElementById("input" + item.id).value);
-        }
-        // this.cartProducts.push([id, user_id, productQuantity]);
-        const product = item;
-        item.productQuantity = productQuantity;
-        this.cart.productsArray.push(product);
-      }
+    // addToCart(item) {
+    //   // if (this.cartProducts.length > 0 && this.cartProducts[0].user_id !== user_id) {
+    //   //   alert('Non puoi aggiungere articoli di ristoranti diversi')
+    //   // } else {
+    //   // if (product.user_id)
+    //   let checkResult = this.cart.productsArray.filter((element) => element.id === item.id ? true : false);
+    //   if (checkResult.length !== 0) {
+    //     checkResult[0].productQuantity++;
+    //     console.log(checkResult[0]);
+    //   } else {
+    //     let productQuantity;
+    //     if (!document.getElementById("input" + item.id).value) {
+    //       productQuantity = 1;
+    //     } else {
+    //       productQuantity = parseInt(document.getElementById("input" + item.id).value);
+    //     }
+    //     // this.cartProducts.push([id, user_id, productQuantity]);
+    //     const product = item;
+    //     item.productQuantity = productQuantity;
+    //     this.cart.productsArray.push(product);
+    //   }
 
-      // document.getElementById("input" + id).value = null;
-      // console.log(this.cartProducts);
-      // console.log(JSON.stringify(product));
-      localStorage.cart = JSON.stringify(this.cart);
+    //   // document.getElementById("input" + id).value = null;
+    //   // console.log(this.cartProducts);
+    //   // console.log(JSON.stringify(product));
+    //   localStorage.cart = JSON.stringify(this.cart);
+    //   console.log(localStorage.cart);
+    // },
+    addToCart(item, index) {
+      let product_quantity = this.quantity_id[index];
+      if (product_quantity === undefined) {
+        product_quantity = 1;
+      }
+      console.log(product_quantity);
+      console.log(item.id, "id");
+      const checkResult = this.cart.filter((product) => product.id == item.id);
+      console.log(checkResult);
+      if (checkResult.length === 0) {
+        item.productQuantity = parseInt(product_quantity);
+        this.cart.push(item);
+      } else {
+        checkResult[0].productQuantity += parseInt(product_quantity);
+        this.cart.push();
+      }
+      this.saveCart();
+    },
+    saveCart() {
+      const parsed = JSON.stringify(this.cart);
+      localStorage.setItem("cart", parsed);
       console.log(localStorage.cart);
+    },
+    resetCart() {
+      this.cart = [];
+      const parsed = JSON.stringify(this.cart);
+      localStorage.setItem("cart", parsed);
     },
   },
 };
