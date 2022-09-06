@@ -86,8 +86,8 @@ export default {
       const slug = this.$route.params.slug;
       axios.get(`/api/${slug}/menu`).then((resp) => {
         // console.log(resp.data.restaurant);
-        this.restaurant = resp.data.restaurant;
-        this.products = resp.data.products;
+        this.restaurant = resp.data.results.restaurant;
+        this.products = resp.data.results.products;
         this.loading = true;
       });
     },
