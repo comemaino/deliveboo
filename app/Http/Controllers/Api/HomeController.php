@@ -60,12 +60,14 @@ class HomeController extends Controller
         // dd(intval($id));
         // dd($slug);
         $restaurant = User::where('slug', '=', $slug)->first();
-        $products = Product::where('user_id', '=', $restaurant['id'])->get();
+        $products = Product::where('user_id', '=', $restaurant['id'])->where('visibility', 1)->get();
         // dd($products);
         return response()->json([
             "success" => true,
-            "restaurant" => $restaurant,
-            "products" => $products
+            "results" => [
+                "restaurant" => $restaurant,
+                "products" => $products
+            ]
         ]);
     }
 }

@@ -88,7 +88,10 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $user_id = $user->id;
-        $product = Product::where('slug', '=', $slug)->first();
+        $product = Product::where('slug', '=', $slug)->where('user_id', '=', $user_id)->first();
+        if(!$product){
+            abort(403, 'Azione non autorizzata');
+        }
         return view('admin.products.edit', compact('product', 'user', 'user_id'));
     }
 
