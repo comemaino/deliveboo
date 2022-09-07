@@ -1,10 +1,8 @@
 <template>
-    <nav>
-        <div class="form-check form-check-inline">
-            <span @click="getSelectedCategory(null)" :class=" categories_id.length === 0 ? 'active' : ''">tutti</span>
-        </div>
-        <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
-            <span @click="getSelectedCategory(category.id)" :class=" categories_id.includes(category.id) ? 'active' : ''">{{ category.name }}</span>
+    <nav class="ms_container mt-2">
+        <h2>Categorie</h2>
+        <div class="form-check form-check-inline m-3" v-for="category in categories" :key="category.id">
+            <span @click="getSelectedCategory(category.id)" >{{ category.name }}</span>
         </div>
     </nav>
 </template>
@@ -14,7 +12,6 @@ export default {
     name: "NavBar",
     props: {
         categories: Array,
-        categories_id: Array
     },
     data() {
         return {
@@ -30,8 +27,15 @@ export default {
 }
 </script>
 
-<style scoped>
-.active {
-    color: red;
+<style lang="scss" scoped>
+.ms_container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+span {
+    border: 1px solid #00cdbc;
+    border-radius: 2rem;
+    padding: .5rem 1rem;
 }
 </style>

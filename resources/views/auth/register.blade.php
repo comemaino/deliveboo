@@ -1,239 +1,187 @@
 @extends('layouts.app')
 
+{{-- @php
+dd($categories);
+@endphp --}}
+
 @section('content')
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-10">
-				<div class="card">
-					<div class="card-header">{{ __('Register') }}</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Register') }}</div>
 
-					<div class="card-body">
-						<form id="register-form"" method="POST" action="{{ route('register') }}" enctype="multipart/form-data"
-							class="sign-up-form needs-validation" novalidate>
-							@csrf
-							@method('POST')
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
 
-							{{-- @if ($errors->any())
-								<div class="alert alert-danger">
-									<ul>
-										@foreach ($errors->all() as $error)
-											<li>{{ $error }}</li>
-										@endforeach
-									</ul>
-								</div>
-							@endif --}}
-							{{-- NOME UTENTE --}}
-							<div class="form-group row">
-								<label for="name" class="col-md-3 col-form-label text-md-right">Nome utente *</label>
+                            {{-- @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif --}}
 
-								<div class="col-md-9">
-									<input form="register-form" id="name" type="text"
-										class="form-control @error('name') is-invalid @enderror" pattern="[a-zA-Z0-9]{4,50}"
-										placeholder="Può contenere solo caratteri alfanumerici" name="name" value="{{ old('name') }}" required
-										autocomplete="name" autofocus>
+                            <div class="form-group row">
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Name*') }}</label>
 
-									@error('name')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                <div class="col-md-6">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-							{{-- NOME ATTIVITà --}}
-							<div class="form-group row">
-								<label for="business_name" class="col-md-3 col-form-label text-md-right">Nome attività *</label>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-9">
-									<input form="register-form" id="business-name" type="text"
-										class="form-control  @error('business_name') is-invalid @enderror" pattern="[^#./$%_*+^]{1,50}"
-										name="business_name" value="{{ old('business_name') }}" required autocomplete="business_name" autofocus>
+                            <div class="form-group row">
+                                <label for="business_name" class="col-md-4 col-form-label text-md-right">Business
+                                    name*</label>
 
-									@error('business_name')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                <div class="col-md-6">
+                                    <input id="business_name" type="text"
+                                        class="form-control @error('business_name') is-invalid @enderror"
+                                        name="business_name" value="{{ old('business_name') }}" required
+                                        autocomplete="business_name" autofocus>
 
-							{{-- INDIRIZZO --}}
-							<div class="form-group row">
-								<label for="address" class="col-md-3 col-form-label text-md-right">Indirizzo *</label>
+                                    @error('business_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-9">
-									<input form="register-form" id="address" type="text"
-										class="form-control @error('address') is-invalid @enderror" name="address"
-										placeholder="es.: Via Roma, 1 10100, Roma (RM)  " value="{{ old('address') }}" required autocomplete="address"
-										autofocus>
+                            <div class="form-group row">
+                                <label for="address" class="col-md-4 col-form-label text-md-right">Address*</label>
 
-									@error('address')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
-							{{-- CATEGORIE --}}
-							<h6>Categorie *</h6>
-							<div class="checkbox-group form-check d-flex flex-wrap">
-								@foreach ($categories as $category)
-									<div id="checkbox-container" class="form-check d-inline-block w-25">
-										<input form="register-form" name="categories[]"
-											class=" form-check-input @error('category_id') is-invalid @enderror" type="checkbox"
-											value="{{ $category->id }}" id="category-{{ $category->id }}"
-											{{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
-										<label class="form-check-label text-capitalize" for="category-{{ $category->id }}">
+                                <div class="col-md-6">
+                                    <input id="address" type="text"
+                                        class="form-control @error('address') is-invalid @enderror" name="address"
+                                        value="{{ old('address') }}" required autocomplete="address" autofocus>
 
-											{{ $category->name }}
-										</label>
-									</div>
-								@endforeach
-							</div>
-							{{-- P. IVA --}}
-							<div class="form-group row">
-								<label for="vat" class="col-md-4 col-form-label text-md-right">P. IVA*</label>
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-6">
-									<input form="register-form" id="vat" type="text" inputmode="numeric" maxlength="11"
-										class="form-control @error('vat') is-invalid @enderror" pattern="[0-9]{11}" name="vat"
-										value="{{ old('vat') }}" required autocomplete="vat" autofocus>
+                            <h6>Categories*</h6>
+                            <div class="form-check row">
+                                @foreach ($categories as $category)
+                                    <div class="form-check">
+                                        <input name="categories[]"
+                                            class="form-check-input @error('category_id') is-invalid @enderror"
+                                            type="checkbox" value="{{ $category->id }}" id="category-{{ $category->id }}"
+                                            {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="category-{{ $category->id }}">
 
-									@error('vat')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                            {{ $category->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="vat" class="col-md-4 col-form-label text-md-right">Vat*</label>
+
+                                <div class="col-md-6">
+                                    <input id="vat" type="text"
+                                        class="form-control @error('vat') is-invalid @enderror" name="vat"
+                                        value="{{ old('vat') }}" required autocomplete="vat" autofocus>
+
+                                    @error('vat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
 
-							{{-- COVER --}}
-							<div class="form-group row">
-								<label for="cover" class="col-md-4 col-form-label text-md-right">{{ __('Immagine di copertina') }}</label>
 
-								<div class="col-md-6">
-									<input form="register-form" id="cover" type="file"
-										class="form-control @error('cover') is-invalid @enderror" name="cover" value="{{ old('cover') }}"
-										accept="image/*" required autocomplete="cover" autofocus>
+                            <div class="form-group row">
+                                <label for="cover"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Restaurant cover') }}</label>
 
-									@error('cover')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                <div class="col-md-6">
+                                    <input id="cover" type="file"
+                                        class="form-control @error('cover') is-invalid @enderror" name="cover"
+                                        value="{{ old('cover') }}" autocomplete="cover" autofocus>
 
-							{{-- EMAIL --}}
-							<div class="form-group row">
-								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail*') }}</label>
+                                    @error('cover')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-6">
-									<input form="register-form" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-										placeholder="example@email.com" class="form-control @error('email') is-invalid @enderror" name="email"
-										value="{{ old('email') }}" required autocomplete="email">
+                            <div class="form-group row">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
 
-									@error('email')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email">
 
-							{{-- PASSWORD --}}
-							<div class="form-group row">
-								<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-6">
-									<input form="register-form" id="password" type="password"
-										class="form-control @error('password') is-invalid @enderror" name="password" required
-										autocomplete="new-password">
+                            <div class="form-group row">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
-									@error('password')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-									@enderror
-								</div>
-							</div>
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="new-password">
 
-							<div class="form-group row">
-								<label for="password-confirm"
-									class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-								<div class="col-md-6">
-									<input form="register-form" id="password-confirm" type="password" class="form-control"
-										name="password_confirmation" required autocomplete="new-password">
-								</div>
-							</div>
+                            <div class="form-group row">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
-							<div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-									<button type="submit" class="btn btn-primary" id="submit" disabled>
-										{{ __('Register') }}
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation" required autocomplete="new-password">
+                                </div>
+                            </div>
 
-	<script type="text/javascript">
-		const submitBtn = document.getElementById('submit')
-		const userName = document.getElementById('name')
-		const businessName = document.getElementById('business-name')
-		const address = document.getElementById('address')
-		const categories = document.querySelectorAll('input[type="checkbox"]')
-		const vat = document.getElementById('vat')
-		const cover = document.getElementById('cover')
-		const email = document.getElementById('email')
-		const password = document.getElementById('password')
-		const pswConfirm = document.getElementById('password-confirm')
-		console.log(categories);
-
-		function updateSubmitBtn() {
-			const userNameValue = userName.value.trim();
-			const businessNameValue = businessName.value.trim();
-			const addressValue = address.value.trim();
-			// const categoriesValue = categories.value;
-			const vatValue = vat.value.trim();
-			const coverValue = cover.value.trim();
-			const emailValue = email.value.trim();
-			const passwordValue = password.value.trim();
-			const pswConfirmValue = pswConfirm.value.trim();
-			let pswMatch = false;
-			if (passwordValue === pswConfirmValue) {
-				pswMatch = true;
-			}
-			const checkArray = Array.prototype.slice.call(categories).some(x => x.checked)
-			// debugger;
-			if (userNameValue && businessNameValue && addressValue && checkArray && vatValue && coverValue && emailValue &&
-				passwordValue &&
-				pswConfirmValue && pswMatch) {
-				submitBtn.removeAttribute('disabled');
-			} else {
-				submitBtn.setAttribute('disabled', 'disabled');
-			}
-
-			console.log(checkArray);
-		}
-
-		userName.addEventListener('input', updateSubmitBtn);
-		businessName.addEventListener('input', updateSubmitBtn);
-		address.addEventListener('input', updateSubmitBtn);
-		vat.addEventListener('input', updateSubmitBtn);
-		cover.addEventListener('input', updateSubmitBtn);
-		email.addEventListener('input', updateSubmitBtn);
-		password.addEventListener('input', updateSubmitBtn);
-		pswConfirm.addEventListener('input', updateSubmitBtn);
-
-		categories.forEach(element => {
-			element.addEventListener('input', updateSubmitBtn)
-		});
-	</script>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Register') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
