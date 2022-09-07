@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cart :theseProducts="products" />
+    <Cart @empty="resetCart()" :theseProducts="products" :bool="bool" />
     <Payment :amount="getAmount()" />
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
     return {
       apiToken: "",
       products: [],
+      bool: true
     };
   },
   methods: {
@@ -35,7 +36,13 @@ export default {
       this.products.forEach((element) => {
         amount += element.price * element.productQuantity;
       });
+      amount = parseFloat(amount.toFixed(2));
       return amount;
+    },
+    resetCart() {
+      this.products = [];
+      const parsed = JSON.stringify(this.products);
+      localStorage.setItem("cart", parsed);
     },
   },
 };

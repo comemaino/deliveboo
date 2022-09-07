@@ -1,6 +1,11 @@
 <template>
   <div>
     <template v-if="loading">
+      <div class="d-flex justify-content-center py-3" v-if="error" @click="error = null">
+        <div class="alert alert-danger">
+          <h3>{{ error }}</h3>
+        </div>
+      </div>
       <div class="row">
         <div class="col-9">
           <div>
@@ -63,6 +68,7 @@ export default {
       products: [],
       cart: [],
       quantity_id: [],
+      error: null,
     };
   },
   created() {
@@ -121,6 +127,16 @@ export default {
     //   console.log(localStorage.cart);
     // },
     addToCart(item, index) {
+      if (this.cart.length !== 0) {
+        for (let i = 0; i < this.cart.length; i++) {
+          let currentProduct = this.cart[i];
+          if (currentProduct.user_id !== item.user_id) {
+            this.error = "Il tuo carrello contiene prodotti provenienti da un'altra attività";
+            return;
+          }
+        }
+      }
+      this.error = null;
       let product_quantity = this.quantity_id[index];
       if (product_quantity === undefined) {
         product_quantity = 1;
