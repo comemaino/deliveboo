@@ -4,5 +4,26 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- require('./bootstrap');
+require('./bootstrap');
+
+if (document.getElementById('flash-message')) {
+    const thisAlert = document.getElementById('flash-message');
+    thisAlert.addEventListener('click', function () {
+        thisAlert.classList.add('d-none');
+    })
+}
+
+if (document.getElementById('delete-btn')) {
+    const thisBtn = document.getElementById('delete-btn');
+    thisBtn.addEventListener('click', function () {
+        const thisBox = document.getElementById('delete-box');
+        thisBox.classList.remove('d-none');
+    })
+
+    const notDelete = document.getElementById('not-delete');
+    notDelete.addEventListener('click', function() {
+        const thisBox = document.getElementById('delete-box');
+        thisBox.classList.add('d-none');
+    })
+}
 
