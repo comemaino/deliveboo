@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'business_name' => 'required|string|unique:users',
             'category_id' => 'exists:categories,id',
             'address' => 'required|string',
-            'vat' => 'required|numeric|digits:11',
+            'vat' => 'required|numeric|digits:11|unique:users',
             'cover' => 'nullable',
         ]);
         // dd($validator);
