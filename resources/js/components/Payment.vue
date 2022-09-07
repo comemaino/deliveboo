@@ -30,6 +30,7 @@
           </div>
         </div>
       </div>
+      <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
     </form>
   </div>
 </template>
@@ -39,12 +40,12 @@ import braintree from "braintree-web";
 
 export default {
   name: "Payment",
-    props: {
-      amount: {
-        required: true,
-        type: Number,
-      },
+  props: {
+    amount: {
+      required: true,
+      type: Number,
     },
+  },
   mounted() {
     axios.get("/api/orders/generate").then((resp) => {
       console.log(resp);
@@ -92,6 +93,7 @@ export default {
       error: "",
       hostedFieldInstance: false,
       apiToken: "",
+      nonce: ""
     };
   },
   methods: {
@@ -113,6 +115,25 @@ export default {
         this.error = message;
       }
       this.$emit("onError", message);
+    },
+    payWithCreditCard() {
+      if (this.hostedFieldInstance) {
+        this.hostedFieldInstance
+          .tokenize()
+          .then((payload) => {
+            console.log(payload);
+            this.nonce = payload.nonce;
+            axios.post('/api/orders/make-payment', {
+                token: this.nonce,
+                amount: this.$props.amount
+            }).then((resp) => {
+                console.log(resp);
+            })
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     },
   },
 };
