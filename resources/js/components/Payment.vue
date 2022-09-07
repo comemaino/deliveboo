@@ -3,8 +3,32 @@
     <!-- <template #button="slotProps">
         <v-btn ref="paymentBtnRef" @click="slotProps.submit" />
       </template> -->
-    <form>
-      <div class="form-group">
+    <form class="px-5 mt-4">
+      <!-- Customer Address -->
+      <div class="form-group p-2">
+        <label for="amount">Indirizzo di spedizione</label>
+        <div class="input-group">
+          
+          <input id="address" name="customer_address" class="form-control" v-model="address" placeholder="Inseirsci il tuo indirizzo" />
+        </div>
+      </div>
+      <!-- Customer E-mail -->
+      <div class="form-group p-2">
+        <label for="amount">Email</label>
+        <div class="input-group">
+          
+          <input id="customerEmail" name="customer_email" class="form-control" v-model="email" placeholder="Inserisci la tua mail" />
+        </div>
+      </div>
+      <!-- Customer Full name -->
+      <div class="form-group p-2">
+        <label for="amount">Nome e Cognome</label>
+        <div class="input-group">
+          
+          <input id="customerFullName" name="customer_fullname" class="form-control" v-model="fullName" placeholder="Nome completo">
+        </div>
+      </div>
+      <div class="form-group p-2">
         <label for="amount">Amount</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -14,11 +38,11 @@
         </div>
       </div>
       <hr />
-      <div class="form-group">
+      <div class="form-group p-2">
         <label>Credit Card Number</label>
         <div id="creditCardNumber" class="form-control"></div>
       </div>
-      <div class="form-group">
+      <div class="form-group p-2">
         <div class="row">
           <div class="col-6">
             <label>Expire Date</label>
@@ -30,7 +54,9 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+      <div class="text-center py-2">
+        <button class="btn btn-primary btn-block text-white" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+      </div>
     </form>
   </div>
 </template>
@@ -59,8 +85,8 @@ export default {
             client: clientInstance,
             styles: {
               input: {
-                "font-size": "14px",
-                "font-family": "Open Sans",
+                "font-size": "16px",
+                "font-family": "Arial",
               },
             },
             fields: {
@@ -93,7 +119,10 @@ export default {
       error: "",
       hostedFieldInstance: false,
       apiToken: "",
-      nonce: ""
+      nonce: "",
+      email: "",
+      address: "",
+      fullName: "",
     };
   },
   methods: {
@@ -117,6 +146,8 @@ export default {
       this.$emit("onError", message);
     },
     payWithCreditCard() {
+      const reducedCart = this.reduceCart();
+      const customer = this.getCustomerData();
       if (this.hostedFieldInstance) {
         this.hostedFieldInstance
           .tokenize()
@@ -127,7 +158,20 @@ export default {
                 token: this.nonce,
                 amount: this.$props.amount
             }).then((resp) => {
-                console.log(resp);
+              const newOrder = {
+                paymentState: resp.data.success,
+                customerData: customer,
+                reducedCart: reducedCart,
+                amount: this.$props.amount,
+              }
+              console.log(resp);
+              const parsed = JSON.stringify(newOrder);
+              console.log(parsed);
+              axios.post('/api/orders/store', {parsed})
+              .then((res) => {
+                console.log(res);
+              })
+            
             })
           })
           .catch((err) => {
@@ -135,6 +179,26 @@ export default {
           });
       }
     },
+    reduceCart() {
+      const resultArray = [];
+      const cart = JSON.parse(localStorage.cart);
+      cart.forEach(element => {
+        const newObject = {
+          id: element.id,
+          quantity: element.productQuantity
+        }
+        resultArray.push(newObject);
+      });
+      return resultArray;
+    },
+    getCustomerData() {
+      const newCustomerData = {
+        fullname: this.fullName,
+        address: this.address,
+        email: this.email
+      }
+      return newCustomerData;
+    }
   },
 };
 </script>
