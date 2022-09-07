@@ -26,9 +26,10 @@
       <button class="btn btn-danger" @click="resetCart()">
         Svuota carrello
       </button>
-      <button class="btn btn-success" @click="resetCart()">
+      <!-- <button class="btn btn-success" @click="resetCart()">
         Checkout
-      </button>
+      </button> -->
+      <router-link :to="{ name: 'Checkout' }">Checkout</router-link>
     </div>
   </div>
 </template>
