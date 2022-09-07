@@ -19,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/{id}', 'Api\HomeController@index')->name('api.restaurants.index');
 Route::get('/{slug}/menu', 'Api\HomeController@show')->name('api.restaurants.show');
+
+Route::get('/orders/generate', 'Api\Orders\OrderController@generate');
+Route::post('/orders/make-payment', 'Api\Orders\OrderController@makePayment');
