@@ -1,5 +1,5 @@
 <template>
-    <nav class="ms_container mt-2">
+    <nav class="mt-2">
         <div class="form-check form-check-inline">
             <span class="card"  @click="getSelectedCategory(null)" :class=" categories_id.length === 0 ? 'active' : ''">tutti </span>
         </div>
@@ -31,10 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ms_container {
-    width: 90%;
-    margin: 0 auto;
-}
 
 .card {
     background-color: #00cdbc;

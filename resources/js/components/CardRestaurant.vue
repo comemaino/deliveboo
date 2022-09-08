@@ -1,5 +1,5 @@
 <template>
-    <div class="card mb-2" style="width: 18rem;">
+    <div class="card mb-2 restaurant-card">
         <img class="card-img-top" :src="'../storage/' + restaurant.cover" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.business_name }}</h5>
@@ -21,5 +21,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+}
 </style>
