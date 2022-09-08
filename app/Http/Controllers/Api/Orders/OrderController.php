@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Api\Orders;
 use Braintree\Gateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderRequest;
+use App\Mail\SendMailToAdmin;
+use App\Mail\SendMailToGuest;
 use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -52,6 +56,7 @@ class OrderController extends Controller
         $productData = $dataEncoded->reducedCart[0];
         $product = Product::findOrFail($productData->id);
         $userId = $product->user_id;
+        $thisUser = User::findOrFail($userId);
         $customerData = $dataEncoded->customerData;
         $paymentState = $dataEncoded->paymentState ? 1 : 0;
         $newOrder = [
@@ -76,6 +81,10 @@ class OrderController extends Controller
             ];
         };
         $order->products()->sync($productsArray);
+        $msgToAdmin = new SendMailToAdmin();
+        $msgToGuest = new SendMailToGuest();
+        Mail::to($thisUser->email)->send($msgToAdmin);
+        Mail::to($order->customer_email)->send($msgToGuest);
         return response()->json([
                 'success' => true,
                 'message' => 'Ordine effettuato'

@@ -1,8 +1,10 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <span class="navbar-brand" href="#">DeliveBoo</span>
+        <img class="logo-img" src="https://image.winudf.com/v2/image1/Y29tLmRlbGl2ZXJvby5vcmRlcmFwcF9pY29uXzE1NTk3NDMyNjNfMDc0/icon.png?w=&fakeurl=1" alt="">
+        <span class="logo-text"><router-link class="nav-link" :to="{ name: 'home' }"
+                >deliveboo</router-link></span>
         <button
           class="navbar-toggler"
           type="button"
@@ -14,15 +16,10 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'home' }"
-                >Home</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <button class="nav-link" @click="dropDown ? dropDown = false : dropDown = true" >Cart</button>
+            <li class="nav-item cart-btn" @click="dropDown ? dropDown = false : dropDown = true">
+              Carrello
               <div class="cart-overview" :class=" dropDown ? 'active' : ''">
                 <h4>Il tuo Carrello</h4>
                 <div class="cart-articles">
@@ -31,7 +28,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item" @click="register">Sei un ristoratore?</li>
+            <li class="nav-item login-btn" @click="register">Accedi o registrati</li>
           </ul>
         </div>
       </div>
@@ -60,6 +57,26 @@ export default {
 <style lang="scss" scoped>
 header {
   position: relative;
+  background-color: #00CDBC;
+  color: white;
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .logo-img {
+    width: 2.5rem;
+  }
+
+  li {
+    padding: .4rem 1.2rem;
+    border: 1px solid #e8ebeb;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+    margin-left: .5rem;
+  }
+
   .cart-overview {
     min-width: 150px;
     padding: 2em;
@@ -74,6 +91,10 @@ header {
 
   .active {
     display: block!important;
+  }
+
+  .login-btn, .cart-btn {
+    cursor: pointer;
   }
 
 }

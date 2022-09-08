@@ -1,10 +1,10 @@
 <template>
-    <nav>
+    <nav class="mt-2">
         <div class="form-check form-check-inline">
-            <span @click="getSelectedCategory(null)" :class=" categories_id.length === 0 ? 'active' : ''">tutti</span>
+            <span class="card"  @click="getSelectedCategory(null)" :class=" categories_id.length === 0 ? 'active' : ''">tutti </span>
         </div>
-        <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
-            <span @click="getSelectedCategory(category.id)" :class=" categories_id.includes(category.id) ? 'active' : ''">{{ category.name }}</span>
+        <div class="form-check form-check-inline m-3" v-for="category in categories" :key="category.id">
+            <div class="card d-flex" @click="getSelectedCategory(category.id)" :class=" categories_id.includes(category.id) ? 'active' : ''">{{ category.name }}</div>
         </div>
     </nav>
 </template>
@@ -30,8 +30,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.card {
+    background-color: #00cdbc;
+    color: white;
+    border: 1px solid #00cdbc;
+    border-radius: 2rem;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+}
+
+.card:active {
+    transform: scale(1.5);
+}
+
 .active {
-    color: red;
+    color: black;
+    box-shadow: .5px .5px 1px 1px rgba(0,0,0,0.25);
 }
 </style>

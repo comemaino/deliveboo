@@ -41,7 +41,7 @@
 							</div>
 
 							{{-- NOME ATTIVITà --}}
-							<div class="form-group row">
+							<div class="form-group row mt-3">
 								<label for="business_name" class="col-md-3 col-form-label text-md-right">Nome attività *</label>
 
 								<div class="col-md-9">
@@ -58,7 +58,7 @@
 							</div>
 
 							{{-- INDIRIZZO --}}
-							<div class="form-group row">
+							<div class="form-group row mt-3">
 								<label for="address" class="col-md-3 col-form-label text-md-right">Indirizzo *</label>
 
 								<div class="col-md-9">
@@ -91,7 +91,7 @@
 								@endforeach
 							</div>
 							{{-- P. IVA --}}
-							<div class="form-group row">
+							<div class="form-group row mt-3">
 								<label for="vat" class="col-md-4 col-form-label text-md-right">P. IVA*</label>
 
 								<div class="col-md-6">
