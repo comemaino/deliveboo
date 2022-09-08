@@ -16,18 +16,24 @@
             @change="addMore(product), getAmount()"
           /> -->
           <span class="amount"
-            >€ {{ product.price * product.productQuantity }}</span
+            >€
+            {{
+              parseFloat((product.price * product.productQuantity).toFixed(2))
+            }}</span
           >
         </li>
       </ul>
       <h5>Totale: € {{ getAmount }}</h5>
     </div>
-    <div class="">
-      <button class="btn btn-danger" @click="resetCart()">
+    <div class="d-flex">
+      <button class="btn btn-danger text-white" @click="resetCart()">
         Svuota carrello
       </button>
-      <button class="btn btn-success" @click="resetCart()">
+      <!-- <button class="btn btn-success" @click="resetCart()">
         Checkout
+      </button> -->
+      <button class="btn btn-success ms-2" v-if="!bool">
+        <router-link class="text-decoration-none text-white" :to="{ name: 'Checkout' }">Checkout</router-link>
       </button>
     </div>
   </div>
@@ -38,6 +44,10 @@ export default {
   name: "Cart",
   props: {
     theseProducts: Array,
+    bool: {
+      required: false,
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -57,6 +67,7 @@ export default {
       this.$props.theseProducts.forEach((element) => {
         amount += element.price * element.productQuantity;
       });
+      amount = parseFloat(amount.toFixed(2));
       return amount;
     },
     getUpdatedProducts() {
