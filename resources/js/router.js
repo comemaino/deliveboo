@@ -9,6 +9,8 @@ import RestaurantMenu from "./components/RestaurantMenu.vue";
 
 import Checkout from "./pages/Checkout.vue";
 
+import Greetings from "./pages/Greetings.vue";
+
 import NotFound from "./pages/NotFound.vue";
 
 
@@ -35,10 +37,17 @@ const router = new VueRouter({
         },
 
         {
+            path: '/cart/checkout/greetings',
+            name: 'greetings',
+            component: Greetings
+        },
+
+        {
             path: '/*',
             name: 'not-found',
             component: NotFound
         },
+
 
     ]
 });
