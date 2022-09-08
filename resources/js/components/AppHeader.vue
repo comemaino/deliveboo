@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <span class="navbar-brand" href="#">DeliveBoo</span>
         <button
@@ -14,7 +14,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'home' }"
@@ -31,7 +31,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item" @click="register">Sei un ristoratore?</li>
+            <li class="nav-item login-btn" @click="register">Sei un ristoratore?</li>
           </ul>
         </div>
       </div>
@@ -60,6 +60,9 @@ export default {
 <style lang="scss" scoped>
 header {
   position: relative;
+  background-color: #00CDBC;
+  color: white;
+
   .cart-overview {
     min-width: 150px;
     padding: 2em;
@@ -74,6 +77,10 @@ header {
 
   .active {
     display: block!important;
+  }
+
+  .login-btn {
+    cursor: pointer;
   }
 
 }
