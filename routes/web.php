@@ -47,10 +47,7 @@ Route::middleware('auth')
         Route::put('/products/update/{id}', 'ProductController@update')->name('products.update');
         Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
         Route::get('/orders', 'OrderController@index')->name('orders.index');
-<<<<<<< HEAD
         Route::get('/orders/chart', 'OrderController@chart')->name('orders.chart');
-=======
->>>>>>> dc8cc8d21d7ac2cf1f0fe07ad2694e1be39272e2
     });
 
 Route::get('{any?}', function() {
