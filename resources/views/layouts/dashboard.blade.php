@@ -74,7 +74,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('admin.orders') }}">
+							<a class="nav-link" href="{{ route('admin.orders.index') }}">
 								<i class="fas fa-plus-square"></i>
 								Visualizza ordini
 							</a>
