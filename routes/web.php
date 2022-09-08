@@ -48,6 +48,7 @@ Route::middleware('auth')
         Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
         Route::get('/orders', 'OrderController@index')->name('orders.index');
         Route::get('/orders/chart', 'OrderController@chart')->name('orders.chart');
+        Route::get('/orders/chart', 'OrderController@chart')->name('orders.chart');
     });
 
 Route::get('{any?}', function() {
