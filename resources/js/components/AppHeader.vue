@@ -97,5 +97,10 @@ header {
     cursor: pointer;
   }
 
+  .login-btn:hover,
+  .cart-btn:hover {
+    border: 1px solid #707777;
+  }
+
 }
 </style>

@@ -1,18 +1,22 @@
 <template>
-  <div>
+
+  <div class="ms_container mt-3">
     <template v-if="loading">
+
       <div class="d-flex justify-content-center py-3" v-if="error" @click="error = null">
         <div class="alert alert-danger">
           <h3>{{ error }}</h3>
         </div>
       </div>
+
       <div class="row">
         <div class="col-9">
           <div>
             <h2>Menù di {{ restaurant.business_name }}</h2>
-            <div class="row row-cols-4">
+
+            <div class="row row-cols-3">
               <div v-for="(product, index) in products" :key="product.id">
-                <div class="card mb-2" style="width: 18rem">
+                <div class="card card-menu mb-2">
                   <img
                     class="card-img-top"
                     :src="'../storage/' + product.img"
@@ -20,7 +24,9 @@
                   />
                   <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">
+                      {{ trimText(product.description, 100) }}
+                    </p>
                     <p class="card-text">{{ product.ingredients }}</p>
                     <div class="add">
                       <span>€ {{ product.price }}</span>
@@ -32,7 +38,7 @@
                         v-model="quantity_id[index]"
                       />
                       <button
-                        class="btn btn-success"
+                        class="btn ms_btn mt-3"
                         @click="addToCart(product, index)"
                       >
                         Aggiungi al carrello
@@ -44,9 +50,11 @@
             </div>
           </div>
         </div>
+
         <div class="col-3">
           <Cart @empty="resetCart()" :theseProducts="cart" />
         </div>
+
       </div>
     </template>
   </div>
@@ -164,9 +172,34 @@ export default {
       const parsed = JSON.stringify(this.cart);
       localStorage.setItem("cart", parsed);
     },
+    trimText(text, maxCharNumb) {
+      if (text.length > maxCharNumb) {
+        return text.substr(0, maxCharNumb) + '...';
+      }
+      return text;
+    }
   },
 };
 </script>
 
-<style lang="">
+<style lang="scss" scoped>
+.ms_container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card-menu {
+  max-height: 500px;
+}
+
+.ms_btn {
+  border: 1px solid #00CDBC;
+  color: #00CDBC;
+}
+
+.ms_btn:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
 </style>
