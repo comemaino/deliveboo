@@ -1,6 +1,6 @@
 body {
   font-size: 16px;
-  background-color: #00cdbc30;
+  // background-color: #00cdbc30;
 
 }
 
@@ -22,7 +22,13 @@ body {
 
   .nav-link {
     color: #00ab9a;
+    white-space: nowrap;
+    overflow: hidden;
   }
+}
+
+.card {
+  margin-top: 2rem;
 }
 
 .card-header {
@@ -32,7 +38,7 @@ body {
   background-color: #00cdbc;
 }
 
-.btn {
+.btn-brand {
   background-color: #00cdbc;
   font-size: 1rem;
   font-weight: 500;
@@ -61,4 +67,28 @@ body {
 .btn-link {
   color: #00cdbc;
   font-weight: bold;
+}
+
+
+
+main {
+  background-color: #00cdbc30;
+  height: 100vh;
+}
+
+.user-page {
+
+  .user-details {
+    color: #008978;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 2rem;
+  }
+}
+
+nav.sidebar {
+  position: sticky;
+  top: 0;
 }

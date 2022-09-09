@@ -24,7 +24,9 @@
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	{{-- CDN ChartJs --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+		integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -52,7 +54,7 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<nav class=" col-md-3 col-lg-2 col-12 d-block bg-light sidebar py-md-4 py-1 h-100">
+			<nav class=" col-12 col-md-3 col-lg-2  d-block bg-light sidebar py-md-4 py-1 px-1">
 				<div class="sidebar-sticky">
 					<ul class="nav flex-md-column flex-row row-cols-3 row-cols-md-1">
 						<li class="nav-item">
@@ -79,16 +81,16 @@
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('admin.orders.index') }}">
-								<i class="fas fa-plus-square"></i>
+								<i class="fas fa-list-ul"></i>
 								Ordini ricevuti
 							</a>
 						</li>
 						<li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.orders.chart') }}">
-                                <i class="fas fa-list-ul"></i>
-                              Statistiche ordini
-                            </a>
-                        </li>
+							<a class="nav-link" href="{{ route('admin.orders.chart') }}">
+								<i class="far fa-chart-bar"></i>
+								Statistiche
+							</a>
+						</li>
 						{{-- <li class="nav-item">
                             <a class="nav-link" href="#">
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
@@ -100,7 +102,7 @@
 				</div>
 			</nav>
 
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+			<main role="main" class="col-12  col-md-9 col-lg-10 p-0">
 				@yield('content')
 			</main>
 		</div>

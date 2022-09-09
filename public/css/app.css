@@ -12636,7 +12636,6 @@ fieldset:disabled .btn {
 
 body {
   font-size: 16px;
-  background-color: rgba(0, 205, 188, 0.1882352941);
 }
 
 .navbar {
@@ -12653,6 +12652,12 @@ body {
 
 .sidebar-sticky .nav-link {
   color: #00ab9a;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  margin-top: 2rem;
 }
 
 .card-header {
@@ -12662,7 +12667,7 @@ body {
   background-color: #00cdbc;
 }
 
-.btn {
+.btn-brand {
   background-color: #00cdbc;
   font-size: 1rem;
   font-weight: 500;
@@ -12691,5 +12696,25 @@ body {
 .btn-link {
   color: #00cdbc;
   font-weight: bold;
+}
+
+main {
+  background-color: rgba(0, 205, 188, 0.1882352941);
+  height: 100vh;
+}
+
+.user-page .user-details {
+  color: #008978;
+}
+
+.user-page img {
+  width: 100%;
+  border-radius: 2rem;
+}
+
+nav.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
