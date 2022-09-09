@@ -20,7 +20,7 @@
 			</h1>
 
 			@if ($product->img)
-				<img style="max-width: 400px;" src="{{ asset('storage/' . $product->img) }}" alt="">
+				<img style="max-width: 400px; border-radius:30px;" src="{{ asset('storage/' . $product->img) }}" alt="">
 			@endif
 		</div>
 

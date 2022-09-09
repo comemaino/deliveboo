@@ -31,7 +31,7 @@
                                 <h5 class="card-title">{{ $item->name }}</h5>
                                 <p class="card-text">{{ $item->description }}</p>
 								<p class="card-text">N° di volte presente in ordine: {{ $final_rank[$index]->top_3 }}</p>
-                                <a href="{{ route('admin.products.show',['slug' => $item->slug] ) }}" class="btn btn-primary">Dettaglio del prodotto</a>
+                                <a href="{{ route('admin.products.show',['slug' => $item->slug] ) }}" class="btn btn-brand">Dettaglio del prodotto</a>
                             </div>
                         </div>
                     @endforeach
