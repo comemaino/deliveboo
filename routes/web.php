@@ -46,7 +46,9 @@ Route::middleware('auth')
         Route::get('/products/edit/{slug}', 'ProductController@edit')->name('products.edit');
         Route::put('/products/update/{id}', 'ProductController@update')->name('products.update');
         Route::delete('/products/delete/{id}', 'ProductController@destroy')->name('products.destroy');
-        Route::get('/orders', 'OrderController@index')->name('orders');
+        Route::get('/orders', 'OrderController@index')->name('orders.index');
+        Route::get('/orders/chart', 'OrderController@chart')->name('orders.chart');
+        Route::get('/orders/chart', 'OrderController@chart')->name('orders.chart');
     });
 
 Route::get('{any?}', function() {

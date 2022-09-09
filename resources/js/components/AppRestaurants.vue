@@ -1,6 +1,6 @@
 <template>
-    <div class="row row-cols-4">
-        <div v-for="restaurant in restaurants" :key="restaurant.id">
+    <div class="row ms_container mt-3">
+        <div class="col-sm-6 col-md-4 col-lg-3" v-for="restaurant in restaurants" :key="restaurant.id">
             <CardRestaurant :restaurant="restaurant" />            
         </div>
     </div>
@@ -24,5 +24,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.ms_container {
+    width: 80%;
+    margin: 0 auto;
+}
 </style>

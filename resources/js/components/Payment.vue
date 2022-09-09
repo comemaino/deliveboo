@@ -170,6 +170,7 @@ export default {
               axios.post('/api/orders/store', {parsed})
               .then((res) => {
                 console.log(res);
+                this.$router.push('checkout/greetings');
               })
             
             })
