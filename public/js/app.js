@@ -1236,13 +1236,8 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-__webpack_require__(/*! C:\Users\fede1\Documents\Boolean\deliveboo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\fede1\Documents\Boolean\deliveboo\resources\sass\app.scss */"./resources/sass/app.scss");
-
 __webpack_require__(/*! /Users/machome/deliveboo-1/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/machome/deliveboo-1/resources/sass/app.scss */"./resources/sass/app.scss");
-
 
 
 /***/ })
