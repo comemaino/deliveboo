@@ -12,7 +12,8 @@
 	@endif
 
 
-	<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" id="product-form">
+	<form class="p-4" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data"
+		id="product-form">
 		@csrf
 		@method('POST')
 		{{-- <div class="mb-3">
@@ -22,9 +23,10 @@
 		{{-- NOME PRODOTTO --}}
 		<div class="mb-3">
 			<label for="name" class="form-label">Nome prodotto *</label>
-			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" form="product-form"
-				pattern="[a-zA-Z]{3,50}" placeholder="Può contenere solo lettere, maiuscole o minuscole. min=3 max=50" required
-				autocomplete="name" autofocus @error('name') is-invalid @enderror>
+			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
+				form="product-form" pattern="[a-zA-Z]{3,50}"
+				placeholder="Può contenere solo lettere, maiuscole o minuscole. min=3 max=50" required autocomplete="name" autofocus
+				@error('name') is-invalid @enderror>
 			@error('name')
 				<span class="invalid-feedback" role="alert">
 					<strong>{{ $message }}</strong>
@@ -101,7 +103,9 @@
 				</label>
 			</div> --}}
 		</div>
+		<div class="btn-wrapper text-center text-md-start">
 
-		<button type="submit" class="btn btn-primary">Invia</button>
+			<button type="submit" class="btn btn-brand ">Invia</button>
+		</div>
 	</form>
 @endsection

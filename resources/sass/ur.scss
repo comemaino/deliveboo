@@ -6,6 +6,7 @@ body {
 
 // DASHBOARD
 .navbar {
+  height: 4rem;
   background-color: #00cdbc;
   
   * {
@@ -18,18 +19,26 @@ body {
 
 }
 
-.sidebar-sticky {
+.sidebar {
+  z-index: 3;
+  .sidebar-sticky {
 
-  .nav-link {
-    color: #00ab9a;
-    white-space: nowrap;
-    overflow: hidden;
+    .nav-link {
+      color: #00ab9a;
+      white-space: nowrap;
+      overflow: hidden;
+  
+      i {
+        font-size: 1.2rem;
+      }
+    }
   }
 }
 
 .card {
   margin-top: 2rem;
 }
+
 
 .card-header {
   font-size: 1.2rem;
@@ -44,6 +53,10 @@ body {
   font-weight: 500;
   color: #fff;
   border: none; 
+
+  &:hover {
+    background-color: #00efde;
+  }
 }
 
 .btn:disabled {
@@ -73,7 +86,7 @@ body {
 
 main {
   background-color: #00cdbc30;
-  height: 100vh;
+  min-height: calc(100vh - 4rem);
 }
 
 .user-page {
@@ -91,4 +104,8 @@ main {
 nav.sidebar {
   position: sticky;
   top: 0;
+}
+
+#delete-box {
+  z-index: 10;
 }

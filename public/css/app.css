@@ -12639,6 +12639,7 @@ body {
 }
 
 .navbar {
+  height: 4rem;
   background-color: #00cdbc;
 }
 
@@ -12650,10 +12651,18 @@ body {
   font-size: 1.5rem;
 }
 
-.sidebar-sticky .nav-link {
+.sidebar {
+  z-index: 3;
+}
+
+.sidebar .sidebar-sticky .nav-link {
   color: #00ab9a;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.sidebar .sidebar-sticky .nav-link i {
+  font-size: 1.2rem;
 }
 
 .card {
@@ -12673,6 +12682,10 @@ body {
   font-weight: 500;
   color: #fff;
   border: none;
+}
+
+.btn-brand:hover {
+  background-color: #00efde;
 }
 
 .btn:disabled {
@@ -12700,7 +12713,7 @@ body {
 
 main {
   background-color: rgba(0, 205, 188, 0.1882352941);
-  height: 100vh;
+  min-height: calc(100vh - 4rem);
 }
 
 .user-page .user-details {
@@ -12716,5 +12729,9 @@ nav.sidebar {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+
+#delete-box {
+  z-index: 10;
 }
 

@@ -56,39 +56,35 @@
 		<div class="row">
 			<nav class=" col-12 col-md-3 col-lg-2  d-block bg-light sidebar py-md-4 py-1 px-1">
 				<div class="sidebar-sticky">
-					<ul class="nav flex-md-column flex-row row-cols-3 row-cols-md-1">
-						<li class="nav-item">
+					<ul class="nav flex-md-column flex-row row-cols-5 row-cols-md-1 justify-content-between">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link active" href="{{ route('admin.home') }}">
 								<i class="fas fa-home"></i>
-								Home Page
+								<span class="d-none d-md-inline-block ">Home Page</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							{{-- <a class="nav-link" href="{{ route('admin.products', ['id' => $user->id]) }}">
-                                <i class="fas fa-border-all"></i>
-                                Tutti i Prodotti
-                            </a> --}}
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.products') }}">
 								<i class="fas fa-border-all"></i>
-								I tuoi prodotti
+								<span class="d-none d-md-inline-block">I tuoi prodotti</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.products.create') }}">
 								<i class="fas fa-plus-square"></i>
-								Nuovo prodotto
+								<span class="d-none d-md-inline-block">Nuovo prodotto</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.orders.index') }}">
 								<i class="fas fa-list-ul"></i>
-								Ordini ricevuti
+								<span class="d-none d-md-inline-block">Ordini ricevuti</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.orders.chart') }}">
 								<i class="far fa-chart-bar"></i>
-								Statistiche
+								<span class="d-none d-md-inline-block">Statistiche</span>
 							</a>
 						</li>
 						{{-- <li class="nav-item">
