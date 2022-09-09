@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
-	<h2 class="py-4 bg-white mb-0 text-center">Pagina Statistiche ordini</h2>
-	<div class="bg-white p-3">
-		<canvas id="myChart" class="mb-5 "></canvas>
-		<canvas id="myChart-2"></canvas>
-		{{-- {{dd($orders_amount)}} --}}
+	<div class="vh-100 bg-white">
+		<h2 class="py-4 bg-white mb-0 text-center">Pagina Statistiche ordini</h2>
+		<div class="bg-white p-3">
+			<canvas id="myChart" class="mb-5 "></canvas>
+			<canvas id="myChart-2"></canvas>
+			{{-- {{dd($orders_amount)}} --}}
+		</div>
 	</div>
 
 	<script>
