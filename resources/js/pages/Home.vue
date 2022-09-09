@@ -1,11 +1,13 @@
 <template>
   <div>
-    <NavBar
-      :categories_id="categories_id"
-      :categories="categories"
-      @selectedCategory="getRestaurants($event)"
-    />
-    <AppRestaurants :restaurants="restaurants" />
+    <div v-if="loading">
+      <NavBar
+        :categories_id="categories_id"
+        :categories="categories"
+        @selectedCategory="getRestaurants($event)"
+      />
+      <AppRestaurants :restaurants="restaurants" />
+    </div>
   </div>
 </template>
 
@@ -22,6 +24,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       restaurants: [],
       categories: [],
       categories_id: [],
@@ -32,22 +35,22 @@ export default {
   },
   methods: {
     getRestaurants(id) {
-        let cat;
-        if (!id) {
-            cat = id;
-            this.categories_id = [];
-        } else if (this.categories_id.includes(id)) {
-          this.categories_id = this.categories_id.filter(cat => cat !== id)
-          if (this.categories_id.length < 1 ) {
-            cat = null;
-          } else {
-            cat = this.categories_id.join();
-          }
+      let cat;
+      if (!id) {
+        cat = id;
+        this.categories_id = [];
+      } else if (this.categories_id.includes(id)) {
+        this.categories_id = this.categories_id.filter((cat) => cat !== id);
+        if (this.categories_id.length < 1) {
+          cat = null;
         } else {
-          this.categories_id.push(id);
-            cat = this.categories_id.join();
+          cat = this.categories_id.join();
         }
-          console.log(cat);
+      } else {
+        this.categories_id.push(id);
+        cat = this.categories_id.join();
+      }
+      console.log(cat);
 
       axios.get(`/api/${cat}`).then((resp) => {
         this.restaurants = resp.data.results.restaurants;
@@ -57,6 +60,7 @@ export default {
         //   this.restaurants.push(resp.data.results.restaurants);
         // }
         this.categories = resp.data.results.categories;
+        this.loading = true;
       });
     },
   },
