@@ -5,7 +5,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-10">
 				<div class="card">
-					<div class="card-header">{{ __('Register') }}</div>
+					<div class="card-header text-center text-uppercase">{{ __('Form di registrazione') }}</div>
 
 					<div class="card-body">
 						<form id="register-form"" method="POST" action="{{ route('register') }}" enctype="multipart/form-data"
@@ -75,26 +75,30 @@
 								</div>
 							</div>
 							{{-- CATEGORIE --}}
-							<h6>Categorie *</h6>
-							<div class="checkbox-group form-check d-flex flex-wrap">
-								@foreach ($categories as $category)
-									<div id="checkbox-container" class="form-check d-inline-block w-25">
-										<input form="register-form" name="categories[]"
-											class=" form-check-input @error('category_id') is-invalid @enderror" type="checkbox"
-											value="{{ $category->id }}" id="category-{{ $category->id }}"
-											{{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
-										<label class="form-check-label text-capitalize" for="category-{{ $category->id }}">
+							<div class="row mt-4">
+								<div class="label col-md-3">
+									<h6>Categorie *</h6>
+								</div>
+								<div class=" row col-md-9 mx-auto checkbox-group form-check d-flex flex-wrap">
+									@foreach ($categories as $category)
+										<div id="checkbox-container" class="form-check d-inline-block col col-6 col-lg-3">
+											<input form="register-form" name="categories[]"
+												class=" form-check-input @error('category_id') is-invalid @enderror" type="checkbox"
+												value="{{ $category->id }}" id="category-{{ $category->id }}"
+												{{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+											<label class="form-check-label text-capitalize" for="category-{{ $category->id }}">
 
-											{{ $category->name }}
-										</label>
-									</div>
-								@endforeach
+												{{ $category->name }}
+											</label>
+										</div>
+									@endforeach
+								</div>
 							</div>
 							{{-- P. IVA --}}
 							<div class="form-group row mt-3">
-								<label for="vat" class="col-md-4 col-form-label text-md-right">P. IVA*</label>
+								<label for="vat" class="col-md-3 col-form-label text-md-right">P. IVA*</label>
 
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<input form="register-form" id="vat" type="text" inputmode="numeric" maxlength="11"
 										class="form-control @error('vat') is-invalid @enderror" pattern="[0-9]{11}" name="vat"
 										value="{{ old('vat') }}" required autocomplete="vat" autofocus>
@@ -109,10 +113,10 @@
 
 
 							{{-- COVER --}}
-							<div class="form-group row">
-								<label for="cover" class="col-md-4 col-form-label text-md-right">{{ __('Immagine di copertina') }}</label>
+							<div class="form-group row mt-3">
+								<label for="cover" class="col-md-3 col-form-label text-md-right">{{ __('Immagine di copertina *') }}</label>
 
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<input form="register-form" id="cover" type="file"
 										class="form-control @error('cover') is-invalid @enderror" name="cover" value="{{ old('cover') }}"
 										accept="image/*" required autocomplete="cover" autofocus>
@@ -126,10 +130,10 @@
 							</div>
 
 							{{-- EMAIL --}}
-							<div class="form-group row">
-								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail*') }}</label>
+							<div class="form-group row mt-3">
+								<label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Indirizzo e-mail *') }}</label>
 
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<input form="register-form" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
 										placeholder="example@email.com" class="form-control @error('email') is-invalid @enderror" name="email"
 										value="{{ old('email') }}" required autocomplete="email">
@@ -143,10 +147,10 @@
 							</div>
 
 							{{-- PASSWORD --}}
-							<div class="form-group row">
-								<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
+							<div class="form-group row mt-3">
+								<label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password *') }}</label>
 
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<input form="register-form" id="password" type="password"
 										class="form-control @error('password') is-invalid @enderror" name="password" required
 										autocomplete="new-password">
@@ -159,20 +163,20 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
+							<div class="form-group row mt-3">
 								<label for="password-confirm"
-									class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
+									class="col-md-3 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
 
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<input form="register-form" id="password-confirm" type="password" class="form-control"
 										name="password_confirmation" required autocomplete="new-password">
 								</div>
 							</div>
 
-							<div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-									<button type="submit" class="btn btn-primary" id="submit" disabled>
-										{{ __('Register') }}
+							<div class="form-group row mt-3 text-center">
+								<div class="col-md-6 offset-md-3 ">
+									<button type="submit" class="btn brand-btn text-bold text-uppercase" id="submit" disabled>
+										Registrati
 									</button>
 								</div>
 							</div>
