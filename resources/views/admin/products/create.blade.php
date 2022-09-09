@@ -82,30 +82,59 @@
 			@enderror
 		</div>
 
-		<div class="mb-3">
-			<h6>Visibilità *</h6>
-			<div class="form-check form-switch mb-3">
-				<input class="form-check-input" type="hidden" name="visibility" data-toggle="switch" form="product-form"
-					value="0">
-				<input class="form-check-input" type="checkbox" id="visibility" name="visibility" data-toggle="switch"
-					form="product-form" value="1">
-				<label class="form-check-label" for="visibility">Visibile ai clienti</label>
+		<div>
+			<div class="mb-3 form-check d-flex p-0 ">
+				{{-- <h6>Visibilità *</h6> --}}
+				<label class="form-label" for="visibility">Visibilità *</label>
+				<div class="form-check form-switch ms-2">
+					<input class="form-check-input" type="hidden" name="visibility" data-toggle="switch" form="product-form"
+						value="0">
+					<input class="form-check-input" type="checkbox" id="visibility" name="visibility" data-toggle="switch"
+						form="product-form" value="1">
+					{{-- <label class="form-check-label" for="visibility">Visibile ai clienti</label>
+				</div> --}}
+
+					{{-- <div class="form-check" @error('description') is-invalid @enderror>
+					<input class="form-check-input" type="radio" name="visibility" id="visibility" value="1">
+					<label class="form-check-label" for="visibility">
+						ON
+					</label>
+					<input class="form-check-input" type="radio" name="visibility" id="visibility" value="0">
+					<label class="form-check-label" for="visibility">
+						OFF
+					</label>
+				</div> --}}
+				</div>
 			</div>
-
-			{{-- <div class="form-check" @error('description') is-invalid @enderror>
-				<input class="form-check-input" type="radio" name="visibility" id="visibility" value="1">
-				<label class="form-check-label" for="visibility">
-					ON
-				</label>
-				<input class="form-check-input" type="radio" name="visibility" id="visibility" value="0">
-				<label class="form-check-label" for="visibility">
-					OFF
-				</label>
-			</div> --}}
-		</div>
-		<div class="btn-wrapper text-center text-md-start">
-
-			<button type="submit" class="btn btn-brand ">Invia</button>
-		</div>
+			<small class=" text-black-50">* I campi indicati sono richiesti</small>
+			<div class="btn-wrapper text-center text-md-start mt-3">
+				<button type="submit" id="submit" class="btn btn-brand" disabled>Invia</button>
+			</div>
 	</form>
+
+	<script type="text/javascript">
+		const submitBtn = document.getElementById('submit')
+		const productName = document.getElementById('name')
+		const productImg = document.getElementById('img')
+		const productPrice = document.getElementById('price')
+		const productIngr = document.getElementById('ingredients')
+
+		function updateSubmitBtn() {
+			const productNameValue = productName.value.trim();
+			const productImgValue = productImg.value.trim();
+			const productIngrValue = productIngr.value.trim();
+			const productPriceValue = productPrice.value.trim();
+
+			if (productNameValue && productImgValue && productIngrValue && productPriceValue) {
+				submitBtn.removeAttribute('disabled');
+			} else {
+				submitBtn.setAttribute('disabled', 'disabled');
+			}
+		}
+
+		productName.addEventListener('input', updateSubmitBtn);
+		productImg.addEventListener('input', updateSubmitBtn);
+		productIngr.addEventListener('input', updateSubmitBtn);
+		productPrice.addEventListener('input', updateSubmitBtn);
+	</script>
 @endsection

@@ -12689,7 +12689,7 @@ body {
 }
 
 .btn:disabled {
-  background-color: rgba(0, 205, 188, 0.5019607843);
+  background-color: rgba(0, 0, 0, 0.1882352941);
   border: none;
   color: #777;
 }

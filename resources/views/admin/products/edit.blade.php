@@ -53,7 +53,7 @@
 
 		{{-- INGREDIENTI --}}
 		<div class="mb-3">
-			<label for="ingredients" class="form-label">Ingredienti</label>
+			<label for="ingredients" class="form-label">Ingredienti *</label>
 			<input type="text" class="form-control" id="ingredients" name="ingredients" value="{{ $product->ingredients }}"
 				form="product-form" required autofocus @error('ingredients') is-invalid @enderror>
 			@error('ingredients')
@@ -80,7 +80,7 @@
 		<div class="mb-3">
 			{{-- <h6>Visibilità *</h6> --}}
 			<div class="form-check d-flex p-0">
-				<label for="visibility">Visibilità</label>
+				<label class="form-label" for="visibility">Visibilità *</label>
 
 				<div class="form-check form-switch ms-2 mb-3">
 					<input class="form-check-input" type="hidden" name="visibility" data-toggle="switch" form="product-form"
@@ -110,7 +110,10 @@
 				</label> --}}
 				</div>
 			</div>
+			<small class=" text-black-50">* I campi indicati sono richiesti</small>
 
-			<button type="submit" class="btn btn-brand">Modifica</button>
+			<div class="btn-wrapper mt-3">
+				<button type="submit" class="btn btn-brand">Modifica</button>
+			</div>
 	</form>
 @endsection
