@@ -4,6 +4,7 @@
 	<div class="container">
 		<h1>Benvenuto {{ $user->name }}</h1>
 		<h2>La tua attività: {{ $user->business_name }}</h2>
+		<h2>Indirizzo della tua attività: {{ $user->address }}</h2>
 	</div>
 	<div class="container row-cols-2 row">
 		<div class="col">
