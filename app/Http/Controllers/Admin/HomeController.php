@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -21,7 +24,39 @@ class HomeController extends Controller
         // $user = User::findOrFail($id);
         $user = Auth::user();
         $user_id = $user->id;
-        return view('admin.home', compact('user', 'user_id'));
+        $last_30_days = Carbon::now()->subDays(30);
+        $last_30_days_orders = Order::where('created_at', '>=', $last_30_days)->where('user_id', $user_id)->get();
+        $number_of_last_30_days_orders = count($last_30_days_orders);
+        $amount_of_last_30_days_orders = 0;
+        foreach($last_30_days_orders as $single_order) {
+            $amount_of_last_30_days_orders += $single_order->amount;
+        }
+        $top_3_products = DB::select("SELECT `product_id`, 
+        COUNT(`product_id`) AS `top_3`
+        FROM `order_product`
+        INNER JOIN `orders` ON `order_product`.`order_id` = `orders`.`id`
+        WHERE `orders`.`user_id` = ".$user_id."
+        GROUP BY `product_id`
+        ORDER BY `top_3` DESC");
+
+        $final_rank = [];
+        if (count($top_3_products) <= 3) {
+            $final_rank = $top_3_products;
+        } else {
+            for ($i = 0; $i < 3; $i++) {
+                $single_product = $top_3_products[$i];
+                $final_rank[] = $single_product;
+            }
+        }
+        
+        $final_rank_data = [];
+        foreach($final_rank as $product) {
+            $product_data = Product::findOrFail($product->product_id);
+            $final_rank_data[] = $product_data;
+        }
+        // dd($final_rank_data);
+
+        return view('admin.home', compact('user', 'user_id', 'number_of_last_30_days_orders', 'amount_of_last_30_days_orders', 'final_rank_data', 'final_rank'));
     }
 
     /**
