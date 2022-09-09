@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <img class="logo-img" src="https://image.winudf.com/v2/image1/Y29tLmRlbGl2ZXJvby5vcmRlcmFwcF9pY29uXzE1NTk3NDMyNjNfMDc0/icon.png?w=&fakeurl=1" alt="">
+        <img class="logo-img" src="img/logo.webp" alt="">
         <span class="logo-text"><router-link class="nav-link" :to="{ name: 'home' }"
                 >deliveboo</router-link></span>
         <button
@@ -101,6 +101,5 @@ header {
   .cart-btn:hover {
     border: 1px solid #707777;
   }
-
 }
 </style>

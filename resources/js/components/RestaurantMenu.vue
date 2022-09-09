@@ -12,9 +12,9 @@
       <div class="row">
         <div class="col-9">
           <div>
-            <h2>Menù di {{ restaurant.business_name }}</h2>
+            <h2 class="m-2">Menù di {{ restaurant.business_name }}</h2>
 
-            <div class="row row-cols-3">
+            <div class="row row-cols-3 mt-3">
               <div v-for="(product, index) in products" :key="product.id">
                 <div class="card card-menu mb-2">
                   <img
