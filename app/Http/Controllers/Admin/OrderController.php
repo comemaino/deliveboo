@@ -26,15 +26,15 @@ class OrderController extends Controller
         $user_id = $user->id;
         $orders = Order::where('user_id', '=', $user_id)->get();
 
-        $orders_date = DB::select('SELECT SUM(`amount`) AS `orders_amount`, MONTH(`orders`.`created_at`) AS `months` FROM `orders` WHERE `user_id` = 13 GROUP BY `months` ORDER BY `months`');
+        $orders_date = DB::select('SELECT SUM(`amount`) AS `orders_amount`, MONTH(`orders`.`created_at`) AS `months` FROM `orders` WHERE `user_id` = '.$user_id.' GROUP BY `months` ORDER BY `months`');
         // dd($orders_date);
-        $months2 =[];
+        $sales = [];
         foreach($orders_date as $order) {
-            $months_sales[$order->months] = $order->orders_amount;
+            $sales[] = $order->orders_amount;
         }
-        $sales = array_values($months_sales);
+        // dd($orders_date);
 
-        $data = Order::select('id','created_at', 'amount')->orderBy('created_at', 'ASC')->get()->groupBy(function($data){
+        $data = Order::select('id','created_at', 'amount')->where('user_id', $user_id)->orderBy('created_at', 'ASC')->get()->groupBy(function($data){
             return Carbon::parse($data->created_at)->format('M');
         });
 
@@ -44,7 +44,7 @@ class OrderController extends Controller
             $months[]=$month;
             $orders_n[]=count($values);
         };
-
+        
         return view('admin.orders.chart',['data'=>$data,'months'=>$months,'orders_n'=>$orders_n, 'sales'=>$sales ]);
 
         // return response()->json('orders_date');

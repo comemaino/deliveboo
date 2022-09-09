@@ -5,7 +5,6 @@
     <div class="container">
         <canvas id="myChart" class="mb-5"></canvas>
         <canvas id="myChart-2"></canvas>
-        {{-- {{dd($months)}} --}}
         {{-- {{dd($orders_amount)}} --}}
     </div>
 
