@@ -1,12 +1,15 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h2>Pagina Statistiche ordini</h2>
-    <div class="container">
-        <canvas id="myChart" class="mb-5"></canvas>
-        <canvas id="myChart-2"></canvas>
-        {{-- {{dd($orders_amount)}} --}}
+    <div class="bg-light">
+        <h2 class="pt-5">Pagina Statistiche ordini</h2>
+        <div class="container">
+            <canvas id="myChart" class="mb-5"></canvas>
+            <canvas id="myChart-2"></canvas>
+            {{-- {{dd($orders_amount)}} --}}
+        </div>
     </div>
+  
 
     <script>
         let _ydata = JSON.parse('{!! json_encode($orders_n) !!}');
