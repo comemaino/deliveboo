@@ -24,13 +24,17 @@
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	{{-- CDN ChartJs --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+		integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap justify-content-between p-3">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Deliveboo</a>
-		<ul class="navbar-nav px-3 ml-auto">
+	<nav class="navbar  flex-nowrap justify-content-between px-3 px-lg-4 py-1 py-lg-3">
+
+		<a class="navbar-brand p-0" href="#">Deliveboo</a>
+
+		<ul class="navbar-nav px-2">
 			{{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">
                     Visita il sito
@@ -50,43 +54,39 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<nav class="col-md-2 d-none d-md-block bg-light sidebar py-4">
+			<nav class=" col-12 col-md-3 col-lg-2  d-block bg-light sidebar py-md-4 py-1 px-1">
 				<div class="sidebar-sticky">
-					<ul class="nav flex-column">
-						<li class="nav-item">
+					<ul class="nav flex-md-column flex-row row-cols-5 row-cols-md-1 justify-content-between">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link active" href="{{ route('admin.home') }}">
 								<i class="fas fa-home"></i>
-								Home Page
+								<span class="d-none d-md-inline-block ">Home Page</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							{{-- <a class="nav-link" href="{{ route('admin.products', ['id' => $user->id]) }}">
-                                <i class="fas fa-border-all"></i>
-                                Tutti i Prodotti
-                            </a> --}}
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.products') }}">
 								<i class="fas fa-border-all"></i>
-								Tutti i Prodotti
+								<span class="d-none d-md-inline-block">I tuoi prodotti</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.products.create') }}">
 								<i class="fas fa-plus-square"></i>
-								Aggiungi un nuovo prodotto
+								<span class="d-none d-md-inline-block">Nuovo prodotto</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item text-center text-md-start">
 							<a class="nav-link" href="{{ route('admin.orders.index') }}">
-								<i class="fas fa-plus-square"></i>
-								Visualizza ordini
+								<i class="fas fa-list-ul"></i>
+								<span class="d-none d-md-inline-block">Ordini ricevuti</span>
 							</a>
 						</li>
-						<li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.orders.chart') }}">
-                                <i class="fas fa-list-ul"></i>
-                              Statistiche ordini
-                            </a>
-                        </li>
+						<li class="nav-item text-center text-md-start">
+							<a class="nav-link" href="{{ route('admin.orders.chart') }}">
+								<i class="far fa-chart-bar"></i>
+								<span class="d-none d-md-inline-block">Statistiche</span>
+							</a>
+						</li>
 						{{-- <li class="nav-item">
                             <a class="nav-link" href="#">
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
@@ -98,7 +98,7 @@
 				</div>
 			</nav>
 
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+			<main role="main" class="col-12  col-md-9 col-lg-10 p-0">
 				@yield('content')
 			</main>
 		</div>

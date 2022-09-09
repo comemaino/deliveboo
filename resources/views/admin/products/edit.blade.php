@@ -11,8 +11,8 @@
 		</div>
 	@endif
 
-	<form action="{{ route('admin.products.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data"
-		id="product-form">
+	<form class="p-3" action="{{ route('admin.products.update', ['id' => $product->id]) }}" method="POST"
+		enctype="multipart/form-data" id="product-form">
 		@csrf
 		@method('PUT')
 		{{-- NOME PRODOTTO --}}
@@ -53,7 +53,7 @@
 
 		{{-- INGREDIENTI --}}
 		<div class="mb-3">
-			<label for="ingredients" class="form-label">Ingredienti</label>
+			<label for="ingredients" class="form-label">Ingredienti *</label>
 			<input type="text" class="form-control" id="ingredients" name="ingredients" value="{{ $product->ingredients }}"
 				form="product-form" required autofocus @error('ingredients') is-invalid @enderror>
 			@error('ingredients')
@@ -78,24 +78,25 @@
 
 		{{-- VISIBILITà --}}
 		<div class="mb-3">
-			<h6>Visibilità *</h6>
-			<div class="form-check">
+			{{-- <h6>Visibilità *</h6> --}}
+			<div class="form-check d-flex p-0">
+				<label class="form-label" for="visibility">Visibilità *</label>
 
-				<div class="form-check form-switch mb-3">
+				<div class="form-check form-switch ms-2 mb-3">
 					<input class="form-check-input" type="hidden" name="visibility" data-toggle="switch" form="product-form"
 						value="0">
 					<input class="form-check-input" type="checkbox" id="visibility" name="visibility" data-toggle="switch"
 						form="product-form" value="1" {{ $product->visibility ? 'checked' : '' }}>
 
-					@if ($product->visibility)
+					{{-- @if ($product->visibility)
 						<label class="form-check-label" for="visibility">Visibile ai clienti</label>
 					@else
 						<label class="form-check-label" for="visibility">Non visibile ai clienti</label>
 					@endif
-				</div>
+				</div> --}}
 
 
-				{{-- <input class="form-check-input" type="radio" name="visibility" id="visibility" value="1"
+					{{-- <input class="form-check-input" type="radio" name="visibility" id="visibility" value="1"
 					{{ $product->visibility ? 'checked' : '' }} />
 				<label class="form-check-label" for="visibility">
 					ON
@@ -107,9 +108,12 @@
 				<label class="form-check-label" for="visibility">
 					OFF
 				</label> --}}
+				</div>
 			</div>
-		</div>
+			<small class=" text-black-50">* I campi indicati sono richiesti</small>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+			<div class="btn-wrapper mt-3">
+				<button type="submit" class="btn btn-brand">Modifica</button>
+			</div>
 	</form>
 @endsection

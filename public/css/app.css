@@ -12634,3 +12634,108 @@ fieldset:disabled .btn {
   }
 }
 
+body {
+  font-size: 16px;
+}
+
+.navbar {
+  height: 4rem;
+  background-color: #00cdbc;
+}
+
+.navbar * {
+  color: #fff;
+}
+
+.navbar .navbar-brand {
+  font-size: 1.5rem;
+}
+
+.sidebar {
+  z-index: 3;
+}
+
+.sidebar .sidebar-sticky .nav-link {
+  color: #00ab9a;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar .sidebar-sticky .nav-link i {
+  font-size: 1.2rem;
+}
+
+.card {
+  margin-top: 2rem;
+}
+
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #00cdbc;
+}
+
+.btn-brand {
+  background-color: #00cdbc;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+}
+
+.btn-brand:hover {
+  background-color: #00efde;
+}
+
+.btn:disabled {
+  background-color: rgba(0, 0, 0, 0.1882352941);
+  border: none;
+  color: #777;
+}
+
+.form-check-input:checked {
+  background-color: #00cdbc;
+  border: 1px solid rgba(0, 205, 188, 0.5019607843);
+}
+
+.form-control:focus,
+.form-check-input:focus,
+.btn:focus {
+  border: 2px solid #00cdbc;
+  box-shadow: none;
+}
+
+.btn-link {
+  color: #00cdbc;
+  font-weight: bold;
+}
+
+main {
+  background-color: rgba(0, 205, 188, 0.1882352941);
+  min-height: calc(100vh - 4rem);
+}
+
+.user-page .user-details {
+  color: #008978;
+}
+
+.user-page img {
+  width: 100%;
+}
+
+nav.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.my_card {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+#delete-box {
+  z-index: 10;
+}
+
