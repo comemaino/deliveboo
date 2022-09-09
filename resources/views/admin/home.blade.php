@@ -7,6 +7,7 @@
 			<h4 class="user-details">{{ $user->business_name }} {{ $user->address }}</h4>
 
 
+
 			<div class="row-cols-md-2 row my-4 ">
 				<div class="col">
 					<img src="{{ asset('storage/' . $user->cover) }}" alt="">

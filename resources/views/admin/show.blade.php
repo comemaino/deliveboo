@@ -9,7 +9,7 @@
 
 
 	@if (count($products) !== 0)
-		<div class="container">
+		<div class="container pb-4">
 			<div class="row row-cols-2  row-cols-lg-4  px-2 justify-content-between gx-3">
 				@foreach ($products as $product)
 					<div class="wrapper">

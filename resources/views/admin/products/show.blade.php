@@ -44,7 +44,7 @@
 			<button id="delete-btn" type="submit" class="btn btn-danger text-white ms-2">Elimina</button>
 
 			<div id="delete-box"
-				class="d-none position-absolute top-0 start-0 w-100 vh-100 d-flex justify-content-center align-items-center bg-dark text-white"
+				class="d-none position-absolute top-0 start-0 w-100  d-flex justify-content-center align-items-center text-white bg-dark"
 				style="--bs-bg-opacity: .8;">
 				<div>
 					<h2 class="text-center">Sei sicuro di voler eliminare questo prodotto?</h2>
