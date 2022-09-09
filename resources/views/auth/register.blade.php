@@ -174,7 +174,8 @@
 							</div>
 
 							<div class="form-group row mt-3 text-center">
-								<div class="col-md-6 offset-md-3 ">
+								<small class=" text-black-50">* I campi indicati sono richiesti</small>
+								<div class="col-md-6 offset-md-3 mt-3">
 									<button type="submit" class="btn brand-btn text-bold text-uppercase" id="submit" disabled>
 										Registrati
 									</button>
