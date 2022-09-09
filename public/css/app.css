@@ -12709,12 +12709,16 @@ main {
 
 .user-page img {
   width: 100%;
-  border-radius: 2rem;
 }
 
 nav.sidebar {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+
+.my_card {
+  border-radius: 30px;
+  overflow: hidden;
 }
 
