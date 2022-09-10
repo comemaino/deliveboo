@@ -8,24 +8,39 @@
       <div class="form-group p-2">
         <label for="amount">Indirizzo di spedizione</label>
         <div class="input-group">
-          
-          <input id="address" name="customer_address" class="form-control" v-model="address" placeholder="Inseirsci il tuo indirizzo" />
+          <input
+            id="address"
+            name="customer_address"
+            class="form-control"
+            v-model="address"
+            placeholder="Inseirsci il tuo indirizzo"
+          />
         </div>
       </div>
       <!-- Customer E-mail -->
       <div class="form-group p-2">
         <label for="amount">Email</label>
         <div class="input-group">
-          
-          <input id="customerEmail" name="customer_email" class="form-control" v-model="email" placeholder="Inserisci la tua mail" />
+          <input
+            id="customerEmail"
+            name="customer_email"
+            class="form-control"
+            v-model="email"
+            placeholder="Inserisci la tua mail"
+          />
         </div>
       </div>
       <!-- Customer Full name -->
       <div class="form-group p-2">
         <label for="amount">Nome e Cognome</label>
         <div class="input-group">
-          
-          <input id="customerFullName" name="customer_fullname" class="form-control" v-model="fullName" placeholder="Nome completo">
+          <input
+            id="customerFullName"
+            name="customer_fullname"
+            class="form-control"
+            v-model="fullName"
+            placeholder="Nome completo"
+          />
         </div>
       </div>
       <div class="form-group p-2">
@@ -55,7 +70,12 @@
         </div>
       </div>
       <div class="text-center py-2">
-        <button class="btn btn-primary btn-block text-white" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+        <button
+          class="btn btn-primary btn-block text-white"
+          @click.prevent="payWithCreditCard"
+        >
+          Pay with Credit Card
+        </button>
       </div>
     </form>
   </div>
@@ -123,6 +143,7 @@ export default {
       email: "",
       address: "",
       fullName: "",
+      disable: false,
     };
   },
   methods: {
@@ -154,26 +175,27 @@ export default {
           .then((payload) => {
             console.log(payload);
             this.nonce = payload.nonce;
-            axios.post('/api/orders/make-payment', {
+            axios
+              .post("/api/orders/make-payment", {
                 token: this.nonce,
-                amount: this.$props.amount
-            }).then((resp) => {
-              const newOrder = {
-                paymentState: resp.data.success,
-                customerData: customer,
-                reducedCart: reducedCart,
                 amount: this.$props.amount,
-              }
-              console.log(resp);
-              const parsed = JSON.stringify(newOrder);
-              console.log(parsed);
-              axios.post('/api/orders/store', {parsed})
-              .then((res) => {
-                console.log(res);
-                this.$router.push('checkout/greetings');
               })
-            
-            })
+              .then((resp) => {
+                const newOrder = {
+                  paymentState: resp.data.success,
+                  customerData: customer,
+                  reducedCart: reducedCart,
+                  amount: this.$props.amount,
+                };
+                console.log(resp);
+                const parsed = JSON.stringify(newOrder);
+                console.log(parsed);
+                axios.post("/api/orders/store", { parsed }).then((res) => {
+                  console.log(res);
+                  this.$emit("empty");
+                  this.$router.push("checkout/greetings");
+                });
+              });
           })
           .catch((err) => {
             console.error(err);
@@ -183,11 +205,11 @@ export default {
     reduceCart() {
       const resultArray = [];
       const cart = JSON.parse(localStorage.cart);
-      cart.forEach(element => {
+      cart.forEach((element) => {
         const newObject = {
           id: element.id,
-          quantity: element.productQuantity
-        }
+          quantity: element.productQuantity,
+        };
         resultArray.push(newObject);
       });
       return resultArray;
@@ -196,10 +218,10 @@ export default {
       const newCustomerData = {
         fullname: this.fullName,
         address: this.address,
-        email: this.email
-      }
+        email: this.email,
+      };
       return newCustomerData;
-    }
+    },
   },
 };
 </script>

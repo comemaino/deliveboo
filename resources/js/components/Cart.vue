@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container py-3">
     <h3>Il tuo carrello</h3>
     <div class="products-list">
-      <ul>
-        <li v-for="(product, index) in getUpdatedProducts" :key="index">
+      <ul class="list-group py-2">
+        <li v-for="(product, index) in getUpdatedProducts" :key="index" class="list-group-item">
           <span>{{ product.name }}</span>
           <button class="btn btn-danger" @click="remove(product)">-</button>
           <span>{{ product.productQuantity }}</span>
@@ -23,7 +23,7 @@
           >
         </li>
       </ul>
-      <h5>Totale: € {{ getAmount }}</h5>
+      <h5 class="py-2">Totale: € {{ getAmount }}</h5>
     </div>
     <div class="d-flex">
       <button class="btn btn-danger text-white" @click="resetCart()">

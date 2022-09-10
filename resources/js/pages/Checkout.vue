@@ -1,7 +1,7 @@
 <template>
   <div>
     <Cart @empty="resetCart()" :theseProducts="products" :bool="bool" />
-    <Payment :amount="getAmount()" />
+    <Payment @empty="resetCart()" :amount="getAmount()" />
   </div>
 </template>
 

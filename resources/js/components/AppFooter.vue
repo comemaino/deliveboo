@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="container-fluid">
       <div class="row">
           <div class="col-md-3 col-sm-12 gx-3 footer-card">
               <h4>Scopri Deliveboo</h4>
