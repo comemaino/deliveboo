@@ -36,6 +36,7 @@
                           :id="'input' + product.id"
                           min="1"
                           v-model="quantity_id[index]"
+                          class="d-inline form-control my-2 ms_input"
                         />
                         <button
                           class="btn ms_btn"
@@ -208,6 +209,10 @@ export default {
 .ms_btn:active {
   transform: scale(0.98);
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.ms_input {
+  width: 100px;
 }
 
 

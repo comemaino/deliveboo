@@ -79,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="text-center mt-5">
+      <div class="text-center my-5">
         <button
           class="btn btn-primary btn-block text-white"
           @click.prevent="payWithCreditCard"

@@ -18,7 +18,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item cart-btn" @click="dropDown ? dropDown = false : dropDown = true">
+            <!-- <li class="nav-item cart-btn" @click="dropDown ? dropDown = false : dropDown = true">
               <i class="fas fa-shopping-cart"></i>
               Carrello
               <div class="cart-overview" :class=" dropDown ? 'active' : ''">
@@ -28,6 +28,10 @@
                   <p>Articolo 2</p>
                 </div>
               </div>
+            </li> -->
+            <li class="nav-item checkout-btn">
+              <i class="fas fa-shopping-cart"></i>
+              <router-link class="text-dark text-decoration-none" :to="{ name: 'Checkout' }">Checkout</router-link>
             </li>
             <li class="nav-item login-btn" @click="register">
               <i class="fas fa-home"></i> Accedi o registrati</li>
@@ -100,12 +104,13 @@ header {
     display: block!important;
   }
 
-  .login-btn, .cart-btn {
+  .login-btn, .cart-btn, .checkout-btn {
     cursor: pointer;
   }
 
   .login-btn:hover,
-  .cart-btn:hover {
+  .cart-btn:hover,
+  .checkout-btn:hover {
     border: 1px solid #707777;
   }
 }

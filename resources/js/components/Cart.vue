@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <div class="container mt-3">
-=======
   <div class="container py-3">
->>>>>>> e3324c2cc74fe7d5d387d89d3c45db668ba77e4e
     <h3>Il tuo carrello</h3>
     <div class="products-list">
       <ul class="list-group py-2">
