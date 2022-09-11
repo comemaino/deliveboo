@@ -12,7 +12,7 @@
         <div class="form-check form-check-inline">
             <span class="card"  @click="getSelectedCategory(null)" :class=" categories_id.length === 0 ? 'active' : ''">tutti </span>
         </div>
-        <div class="form-check form-check-inline m-3" v-for="category in categories" :key="category.id">
+        <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
             <div class="card d-flex" @click="getSelectedCategory(category.id)" :class=" categories_id.includes(category.id) ? 'active' : ''">{{ category.name }}</div>
         </div>
     </nav>

@@ -36,6 +36,17 @@
           </div>
           <div class="col-md-3 col-sm-12 footer-card">
               <h4>Seguici sui social</h4>
+              <ul class="social-icons d-flex">
+                  <li>
+                      <a href="https://www.facebook.com/DeliverooIT"><i class="fa-brands fa-facebook"></i></a>
+                  </li>
+                  <li>
+                      <a href="https://twitter.com/deliveroo_italy"><i class="fa-brands fa-twitter"></i></a>
+                  </li>
+                  <li>
+                      <a href="https://www.instagram.com/deliveroo_italy/"><i class="fa-brands fa-instagram"></i></a>
+                  </li>
+              </ul>
           </div>
       </div>
   </footer>
@@ -50,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 footer {
     background-color: #2e3333;
-    margin-top: 5rem;
+    // margin-top: 5rem;
 }
 
 .row{
@@ -63,8 +74,8 @@ footer {
     color: white;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    margin-left: 8px;
-    width: calc(100% / 4 - 16px);
+    // margin-left: 8px;
+    // width: calc(100% / 4 - 16px);
     
 }
 
@@ -89,4 +100,17 @@ a:hover {
     color: #00CDBC;
 }
 
+.social-icons > li {
+    margin: 0 8px;
+
+    .fa-brands {
+        font-size: 30px;
+        line-height: 60px;
+    }
+
+    .fa-brands:hover {
+        transform: translate(0, -10%);
+        transition: ease-in-out .4s;
+    }
+}
 </style>

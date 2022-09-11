@@ -19,6 +19,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item cart-btn" @click="dropDown ? dropDown = false : dropDown = true">
+              <i class="fas fa-shopping-cart"></i>
               Carrello
               <div class="cart-overview" :class=" dropDown ? 'active' : ''">
                 <h4>Il tuo Carrello</h4>
@@ -28,7 +29,8 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item login-btn" @click="register">Accedi o registrati</li>
+            <li class="nav-item login-btn" @click="register">
+              <i class="fas fa-home"></i> Accedi o registrati</li>
           </ul>
         </div>
       </div>
@@ -75,6 +77,11 @@ header {
     background-color: white;
     color: black;
     margin-left: .5rem;
+  }
+
+  .fas {
+    color: #00CDBC;
+    padding-right: .3rem;
   }
 
   .cart-overview {

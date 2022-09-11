@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <h3>Il tuo carrello</h3>
     <div class="products-list">
       <ul>
@@ -25,14 +25,14 @@
       </ul>
       <h5>Totale: € {{ getAmount }}</h5>
     </div>
-    <div class="d-flex">
+    <div class="text-center">
       <button class="btn btn-danger text-white" @click="resetCart()">
         Svuota carrello
       </button>
       <!-- <button class="btn btn-success" @click="resetCart()">
         Checkout
       </button> -->
-      <button class="btn btn-success ms-2" v-if="!bool">
+      <button class="btn btn-success mt-1" v-if="!bool">
         <router-link class="text-decoration-none text-white" :to="{ name: 'Checkout' }">Checkout</router-link>
       </button>
     </div>
@@ -125,5 +125,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container {
+  padding: 2rem;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.133);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 6px 0 rgba(29, 29, 29, 0.203);
+
+}
 </style>
