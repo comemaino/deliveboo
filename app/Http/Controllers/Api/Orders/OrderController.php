@@ -81,8 +81,8 @@ class OrderController extends Controller
             ];
         };
         $order->products()->sync($productsArray);
-        $msgToAdmin = new SendMailToAdmin();
-        $msgToGuest = new SendMailToGuest();
+        $msgToAdmin = new SendMailToAdmin($order);
+        $msgToGuest = new SendMailToGuest($order, $productsArray);
         Mail::to($thisUser->email)->send($msgToAdmin);
         Mail::to($order->customer_email)->send($msgToGuest);
         return response()->json([

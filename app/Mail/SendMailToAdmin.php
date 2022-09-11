@@ -11,16 +11,16 @@ class SendMailToAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    // protected $msg;
+    protected $order;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($_order)
     {
-        // $this->msg = $_msg;
+        $this->order = $_order;
     }
 
     /**
@@ -30,7 +30,7 @@ class SendMailToAdmin extends Mailable
      */
     public function build()
     {
-        // $new_msg = $this->msg;
-        return $this->view('mails.send_mail_to_admin');
+        $new_order = $this->order;
+        return $this->view('mails.send_mail_to_admin', compact('new_order'));
     }
 }

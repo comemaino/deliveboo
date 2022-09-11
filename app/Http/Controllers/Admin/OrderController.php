@@ -53,7 +53,12 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order_data = Order::with(['products'])->where('id', $id)->first();
+        $user = Auth::user();
+        $user_id = $user->id;
+        $order_data = Order::with(['products'])->where('id', $id)->where('user_id', $user_id)->first();
+        if (!$order_data) {
+            abort(403, 'Azione non autorizzata');
+        }
         // dd($order_data);
         // dd($order_data->products);
         $amount = $order_data->amount;
