@@ -5,8 +5,7 @@
         <h2 class="py-4 bg-white mb-0 text-center">Pagina Statistiche ordini</h2>
         <div class="bg-white p-3">
             <canvas id="myChart" class="mb-5 "></canvas>
-            <canvas id="myChart-2"></canvas>
-            {{-- {{dd($orders_amount)}} --}}
+            <canvas id="myChart-2" class="mb-5"></canvas>
         </div>
     </div>
 
