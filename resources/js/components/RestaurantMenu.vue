@@ -36,6 +36,7 @@
                         :id="'input' + product.id"
                         min="1"
                         v-model="quantity_id[index]"
+                        class="form-control text-center mt-2"
                       />
                       <button
                         class="btn ms_btn mt-3"

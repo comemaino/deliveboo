@@ -4,6 +4,11 @@
         <v-btn ref="paymentBtnRef" @click="slotProps.submit" />
       </template> -->
     <form class="px-5 mt-4">
+      <template v-if="errors">
+        <div v-for="(error, index) in errors" :key="index+5" class="alert alert-danger fw-bold" role="alert">
+          Attenzione, il campo {{ error }} non è valido!
+        </div>
+      </template>
       <!-- Customer Address -->
       <div class="form-group p-2">
         <label for="amount">Indirizzo di spedizione</label>
@@ -44,7 +49,7 @@
         </div>
       </div>
       <div class="form-group p-2">
-        <label for="amount">Amount</label>
+        <label for="amount">Totale</label>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">€</span>
@@ -53,14 +58,19 @@
         </div>
       </div>
       <hr />
+      <template v-if="paymentErrors">
+        <div v-for="(error, index) in paymentErrors" :key="index" class="alert alert-danger fw-bold" role="alert">
+          Attenzione, il campo {{ error }} non è valido!
+        </div>
+      </template>
       <div class="form-group p-2">
-        <label>Credit Card Number</label>
+        <label>Numero Carta di Credito</label>
         <div id="creditCardNumber" class="form-control"></div>
       </div>
       <div class="form-group p-2">
         <div class="row">
           <div class="col-6">
-            <label>Expire Date</label>
+            <label>Data di Scadenza</label>
             <div id="expireDate" class="form-control"></div>
           </div>
           <div class="col-6">
@@ -69,12 +79,19 @@
           </div>
         </div>
       </div>
-      <div class="text-center py-2">
+      <div class="text-center mt-5">
         <button
           class="btn btn-primary btn-block text-white"
           @click.prevent="payWithCreditCard"
+          :class="disable ? 'd-none' : ''"
         >
-          Pay with Credit Card
+          Paga con carta di credito
+        </button>
+        <button
+          class="btn btn-primary btn-block text-white disabled"
+          :class="!disable ? 'd-none' : ''"
+        >
+          Pagamento in corso...
         </button>
       </div>
     </form>
@@ -136,7 +153,8 @@ export default {
   },
   data() {
     return {
-      error: "",
+      errors: "",
+      paymentErrors: "",
       hostedFieldInstance: false,
       apiToken: "",
       nonce: "",
@@ -169,12 +187,15 @@ export default {
     payWithCreditCard() {
       const reducedCart = this.reduceCart();
       const customer = this.getCustomerData();
-      if (this.hostedFieldInstance) {
+      if (this.hostedFieldInstance && this.email && this.address && this.fullName && this.amount) {
+        this.errors = "";
         this.hostedFieldInstance
           .tokenize()
           .then((payload) => {
+            this.paymentErrors = "";
             console.log(payload);
             this.nonce = payload.nonce;
+            this.disable = true;
             axios
               .post("/api/orders/make-payment", {
                 token: this.nonce,
@@ -198,8 +219,21 @@ export default {
               });
           })
           .catch((err) => {
-            console.error(err);
+            if (err.details) {
+              this.paymentErrors = [];
+              err.details.invalidFieldKeys.indexOf("number") !== -1 ? this.paymentErrors.push("Numero Carta di Credito") : '';
+              err.details.invalidFieldKeys.indexOf("cvv") !== -1 ? this.paymentErrors.push("CVV") : '';
+              err.details.invalidFieldKeys.indexOf("expirationDate") !== -1 ? this.paymentErrors.push("Data di Scadenza") : '';
+            } else {
+              this.paymentErrors = ["Numero Carta di Credito", "CVV", "Data di Scadenza"];
+            }
           });
+      } else {
+        this.errors = [];
+        this.email ? '' : this.errors.push("Email");
+        this.fullName ? '' : this.errors.push("Nome e Cognome");
+        this.address ? '' : this.errors.push("Indirizzo di spedizione");
+        this.amount ? '' : this.errors.push("Totale");
       }
     },
     reduceCart() {
