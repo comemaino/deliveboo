@@ -65,7 +65,7 @@
 
 		{{-- DESCRIZIONE --}}
 		<div class="mb-3">
-			<label for="description" class="form-label">Descrizione</label>
+			<label for="description" class="form-label">Descrizione *</label>
 			<input type="text" size="100" class="form-control" id="description" name="description"
 				value="{{ $product->description }}" form="product-form" autofocus @error('description') is-invalid @enderror>
 
