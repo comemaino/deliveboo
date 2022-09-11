@@ -13,6 +13,12 @@
             </p>
           </div>
         </div>
+<<<<<<< HEAD
+        <div class="form-check form-check-inline" v-for="category in categories" :key="category.id">
+            <div class="card d-flex" @click="getSelectedCategory(category.id)" :class=" categories_id.includes(category.id) ? 'active' : ''">{{ category.name }}</div>
+        </div>
+    </nav>
+=======
       </div>
     </div>
     <div class="form-check form-check-inline">
@@ -37,6 +43,7 @@
       </div>
     </div>
   </nav>
+>>>>>>> e3324c2cc74fe7d5d387d89d3c45db668ba77e4e
 </template>
 
 <script>

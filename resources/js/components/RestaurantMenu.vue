@@ -1,63 +1,64 @@
 <template>
+  <div class="bg">
+    <div class="ms_container pt-3">
+      <template v-if="loading">
 
-  <div class="ms_container mt-3">
-    <template v-if="loading">
-
-      <div class="d-flex justify-content-center py-3" v-if="error" @click="error = null">
-        <div class="alert alert-danger">
-          <h3>{{ error }}</h3>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-9">
-          <div>
-            <h2 class="m-2">Menù di {{ restaurant.business_name }}</h2>
-
-            <div class="row row-cols-3 mt-3">
-              <div v-for="(product, index) in products" :key="product.id">
-                <div class="card card-menu mb-2">
-                  <img
-                    class="card-img-top"
-                    :src="'../storage/' + product.img"
-                    alt="Card image cap"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">
-                      {{ trimText(product.description, 100) }}
-                    </p>
-                    <p class="card-text">{{ product.ingredients }}</p>
-                    <div class="add">
-                      <span>€ {{ product.price }}</span>
-                      <input
-                        type="number"
-                        name="product_quantity"
-                        :id="'input' + product.id"
-                        min="1"
-                        v-model="quantity_id[index]"
-                        class="form-control text-center mt-2"
-                      />
-                      <button
-                        class="btn ms_btn mt-3"
-                        @click="addToCart(product, index)"
-                      >
-                        Aggiungi al carrello
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="d-flex justify-content-center py-3" v-if="error" @click="error = null">
+          <div class="alert alert-danger">
+            <h3>{{ error }}</h3>
           </div>
         </div>
 
-        <div class="col-3">
-          <Cart @empty="resetCart()" :theseProducts="cart" />
-        </div>
+        <div class="row">
+          <div class="col-md-9 col-sm-12">
+            <div>
+              <h2 class="m-2">Menù di {{ restaurant.business_name }}</h2>
 
-      </div>
-    </template>
+              <div class="row mt-3">
+                  <div class="col-sm-6 col-md-6" v-for="(product, index) in products" :key="product.id">
+                    <div class="card card-menu mb-2">
+                      <img
+                      class="card-img-top"
+                      :src="'../storage/' + product.img"
+                      alt="Card image cap"
+                      />
+                      <div class="card-body">
+                      <h5 class="card-title">{{ product.name }}</h5>
+                      <p class="card-text">
+                        {{ trimText(product.description, 100) }}
+                      </p>
+                      <p class="card-text">{{ product.ingredients }}</p>
+                      <div class="add">
+                        <span>€ {{ product.price }}</span>
+                        <input
+                          type="number"
+                          name="product_quantity"
+                          :id="'input' + product.id"
+                          min="1"
+                          v-model="quantity_id[index]"
+                        />
+                        <button
+                          class="btn ms_btn"
+                          @click="addToCart(product, index)"
+                        >
+                          Aggiungi al carrello
+                        </button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-12 d-flex align-items-center cart">
+            <Cart @empty="resetCart()" :theseProducts="cart" />
+          </div>
+
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -184,6 +185,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bg {
+  background-image: linear-gradient(to bottom, #00CDBC, #a8eee0);
+  padding-bottom: 5rem;
+}
+
 .ms_container {
   width: 80%;
   margin: 0 auto;
@@ -196,11 +202,13 @@ export default {
 .ms_btn {
   border: 1px solid #00CDBC;
   color: #00CDBC;
+  margin: .5rem;
 }
 
 .ms_btn:active {
   transform: scale(0.98);
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
+
 
 </style>

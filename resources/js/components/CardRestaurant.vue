@@ -27,4 +27,8 @@ img {
     height: 15rem;
     object-fit: cover;
 }
+
+.card-restaurant {
+    min-height: 350px;
+}
 </style>
