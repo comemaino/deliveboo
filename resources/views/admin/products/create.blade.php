@@ -24,7 +24,7 @@
 		<div class="mb-3">
 			<label for="name" class="form-label">Nome prodotto *</label>
 			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
-				form="product-form" pattern="[a-zA-Z]{3,50}"
+				form="product-form" pattern="{3,50}"
 				placeholder="Può contenere solo lettere, maiuscole o minuscole. min=3 max=50" required autocomplete="name" autofocus
 				@error('name') is-invalid @enderror>
 			@error('name')
