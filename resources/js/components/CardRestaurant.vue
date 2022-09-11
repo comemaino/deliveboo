@@ -4,7 +4,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.business_name }}</h5>
             <p class="card-text">{{ restaurant.address }}</p>
-            <router-link :to="{ name: 'RestaurantMenu', params: { slug: restaurant.slug } }" class="btn btn-primary">Menù Ristorante</router-link>
+            <router-link :to="{ name: 'RestaurantMenu', params: { slug: restaurant.slug } }" class="btn btn-brand">Menù Ristorante</router-link>
         </div>
     </div>
 </template>

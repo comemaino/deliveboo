@@ -13,15 +13,13 @@
 			<div class="row row-cols-2  row-cols-lg-4  px-2 justify-content-between gx-3">
 				@foreach ($products as $product)
 					<div class="wrapper">
-						<div class="card">
+						<div class="card" style="height: 400px;">
 							@if ($product->img)
-								<img src="{{ asset('storage/' . $product->img) }}" class="card-img-top" alt="...">
+								<img src="{{ asset('storage/' . $product->img) }}" class="card-img-top" alt="..." style="height: 50%; object-fit:cover;" >
 							@endif
 							<div class="card-body">
 								<div class="name d-flex justify-content-between">
-									<h5 class="card-title">{{ $product->name }}
-
-									</h5>
+									<h5 class="card-title">{{ $product->name }}</h5>
 									<p class="">
 										@if ($product->visibility)
 											<i class="fa-solid fa-eye" style="color: green"></i>

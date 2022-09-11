@@ -9,51 +9,41 @@
           </div>
         </div>
 
-        <div class="row">
+        <h1 class="m-2 my_title" style="font-weight: 900; color: white;">Menù di {{ restaurant.business_name }}</h1>
+        <div class="row align-items-start">
           <div class="col-md-9 col-sm-12">
             <div>
-              <h2 class="m-2">Menù di {{ restaurant.business_name }}</h2>
 
-              <div class="row mt-3">
-                  <div class="col-sm-6 col-md-6" v-for="(product, index) in products" :key="product.id">
-                    <div class="card card-menu mb-2">
-                      <img
-                      class="card-img-top"
-                      :src="'../storage/' + product.img"
-                      alt="Card image cap"
-                      />
-                      <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6 col-md-6" v-for="(product, index) in products" :key="product.id">
+                  <div class="card card-menu mb-2">
+                    <div class="wrapper">
+                      <img class="card-img-top" :src="'../storage/' + product.img" alt="Card image cap" />
+                    </div>
+                    <div class="card-body">
                       <h5 class="card-title">{{ product.name }}</h5>
-                      <p class="card-text">
-                        {{ trimText(product.description, 100) }}
+                      <p class="card-text my_card_text">
+                        <!-- {{ trimText(product.description, 100) }} -->
+                        {{ product.description }}
                       </p>
                       <p class="card-text">{{ product.ingredients }}</p>
                       <div class="add">
                         <span>€ {{ product.price }}</span>
-                        <input
-                          type="number"
-                          name="product_quantity"
-                          :id="'input' + product.id"
-                          min="1"
-                          v-model="quantity_id[index]"
-                          class="d-inline form-control my-2 ms_input"
-                        />
-                        <button
-                          class="btn ms_btn"
-                          @click="addToCart(product, index)"
-                        >
+                        <input type="number" name="product_quantity" :id="'input' + product.id" min="1"
+                          v-model="quantity_id[index]" class="d-inline form-control my-2 ms_input" />
+                        <button class="btn ms_btn" @click="addToCart(product, index)">
                           Aggiungi al carrello
                         </button>
                       </div>
-                      </div>
                     </div>
                   </div>
-                
+                </div>
+
               </div>
             </div>
           </div>
-
-          <div class="col-md-3 col-sm-12 d-flex align-items-center cart">
+          
+          <div class="col-md-3 col-sm-12 d-flex align-items-start cart pt-5">
             <Cart @empty="resetCart()" :theseProducts="cart" />
           </div>
 
@@ -197,7 +187,23 @@ export default {
 }
 
 .card-menu {
-  max-height: 500px;
+  min-height: 500px;
+  .wrapper {
+    width: 100%;
+    // height: 50%;
+    // aspect-ratio: 1;
+    // overflow: hidden;
+    img {
+      max-width: 100%!important;
+      height: 15rem!important;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .my_card_text {
+    max-height: 130px;
+    overflow-y: auto;
+  }
 }
 
 .ms_btn {
@@ -214,6 +220,4 @@ export default {
 .ms_input {
   width: 100px;
 }
-
-
 </style>

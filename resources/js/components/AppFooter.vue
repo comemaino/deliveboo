@@ -61,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 footer {
     background-color: #2e3333;
-    // margin-top: 5rem;
+    height: 395px;
 }
 
 .row{

@@ -27,7 +27,7 @@
       </span>
     </div>
     <div
-      class="form-check form-check-inline m-3"
+      class="form-check form-check-inline m-0"
       v-for="category in categories"
       :key="category.id"
     >
